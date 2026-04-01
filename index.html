@@ -10,7 +10,12 @@
 body{background:#020617;color:white}
 
 /* HEADER */
-header{display:flex;justify-content:space-between;padding:15px;}
+header{
+display:flex;
+justify-content:space-between;
+padding:15px;
+}
+
 .logo{
 font-size:22px;
 font-weight:bold;
@@ -18,7 +23,8 @@ background:linear-gradient(90deg,#00f0ff,#7c3aed);
 -webkit-background-clip:text;
 color:transparent;
 }
-nav a{margin-left:15px;color:white;cursor:pointer}
+
+nav a{margin-left:15px;cursor:pointer}
 
 /* BANNER */
 .banner{
@@ -33,18 +39,30 @@ color:transparent;
 
 /* HERO */
 .hero{text-align:center;padding:20px;}
-.btn{
-padding:15px 25px;
-background:linear-gradient(90deg,#00f0ff,#7c3aed);
-border-radius:10px;
-text-decoration:none;
-color:white;
-display:inline-block;
+
+.buttons{
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
 margin-top:20px;
 }
 
+.btn{
+padding:15px 25px;
+border-radius:10px;
+background:linear-gradient(90deg,#00f0ff,#7c3aed);
+text-decoration:none;
+color:white;
+}
+
 /* STATS */
-.stats{display:flex;justify-content:center;gap:40px;margin-top:20px;}
+.stats{
+display:flex;
+justify-content:center;
+gap:40px;
+margin-top:20px;
+}
 
 /* CARDS */
 .card{
@@ -65,17 +83,12 @@ color:transparent;
 }
 
 /* CAROUSEL */
-.carousel{
-display:flex;
-overflow:hidden;
-margin-top:20px;
-}
-
+.carousel{overflow:hidden;margin-top:20px;}
 .carousel-track{
 display:flex;
+width:200%;
 animation:scroll 15s linear infinite;
 }
-
 .carousel img{
 width:70px;
 height:70px;
@@ -89,10 +102,7 @@ margin:10px;
 }
 
 /* INSTRUÇÕES */
-.instructions{
-padding:40px;
-}
-
+.instructions{padding:40px;}
 .instructions h2{
 font-size:26px;
 margin-top:25px;
@@ -100,7 +110,6 @@ background:linear-gradient(90deg,#00f0ff,#7c3aed);
 -webkit-background-clip:text;
 color:transparent;
 }
-
 .instructions p{
 font-size:16px;
 line-height:1.8;
@@ -108,12 +117,12 @@ margin-top:10px;
 color:#ccc;
 }
 
-/* COMANDOS */
+/* SECTIONS */
 .section{display:none;}
 .active{display:block;}
 
+/* COMANDOS */
 .categoria{margin-top:20px;color:#00f0ff;}
-
 .cmd{
 display:flex;
 justify-content:space-between;
@@ -123,17 +132,14 @@ padding:12px;
 border-radius:8px;
 margin-top:8px;
 }
-
 .copy-btn{
 background:#7c3aed;
 border:none;
 padding:6px 10px;
-color:white;
 border-radius:6px;
+color:white;
 cursor:pointer;
 }
-
-small{color:#aaa;}
 
 footer{text-align:center;padding:20px;color:#777;}
 </style>
@@ -152,20 +158,33 @@ footer{text-align:center;padding:20px;color:#777;}
 <div class="banner">Hydra Tecnologias Avançadas</div>
 
 <!-- HOME -->
-<section id="home" class="active">
+<section id="home" class="section active">
 
 <div class="hero">
 <h1>Domine o Hydra Bot</h1>
 <p>Automação, economia e poder total</p>
 
-<a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&scope=bot%20applications.commands" class="btn">
+<!-- BOTÕES -->
+<div class="buttons">
+
+<a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&scope=bot%20applications.commands"
+target="_blank"
+class="btn">
 Adicionar ao Discord
 </a>
+
+<a href="https://discord.gg/Fr4usMy4E"
+target="_blank"
+class="btn">
+Servidor Suporte
+</a>
+
+</div>
 
 <div class="stats">
 <div><b>6</b><br>Servidores</div>
 <div><b>6</b><br>Usuários</div>
-<div><b>+40</b><br>Comandos</div>
+<div><b>+32</b><br>Comandos</div>
 </div>
 </div>
 
@@ -178,49 +197,37 @@ Adicionar ao Discord
 <!-- CAROUSEL -->
 <div class="carousel">
 <div class="carousel-track">
+
 <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
 <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
-<img src="https://cdn-icons-png.flaticon.com/512/5968756.png">
-<img src="https://cdn-icons-png.flaticon.com/512/5968756.png">
-<img src="https://cdn-icons-png.flaticon.com/512/5968756.png">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
+
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
+
 </div>
 </div>
 
-<!-- INSTRUÇÕES GRANDES -->
 <div class="instructions">
+<h2>📌 Como adicionar o Hydra</h2>
+<p>Clique em "Adicionar ao Discord", escolha o servidor e confirme.</p>
 
-<h2>📌 Como adicionar o Hydra ao seu servidor</h2>
-<p>
-Para começar, clique no botão "Adicionar ao Discord". Você será redirecionado para o site oficial do Discord,
-onde poderá escolher o servidor desejado. Após selecionar, confirme as permissões e finalize a instalação.
-</p>
+<h2>🔐 Permissões</h2>
+<p>O Hydra precisa de permissões administrativas.</p>
 
-<h2>🔐 Permissões necessárias</h2>
-<p>
-O Hydra precisa de permissões administrativas para funcionar corretamente. Isso inclui gerenciar mensagens,
-cargos e canais. Sem isso, várias funções podem não funcionar.
-</p>
-
-<h2>⚙️ Hierarquia do bot</h2>
-<p>
-Após adicionar o bot, vá até as configurações do servidor e mova o cargo do Hydra para o topo da hierarquia.
-Isso garante que ele tenha prioridade para executar todas as ações.
-</p>
-
-<h2>🚀 Conclusão</h2>
-<p>
-Depois de configurado, o Hydra estará pronto para automatizar seu servidor e oferecer uma experiência completa.
-</p>
-
+<h2>⚙️ Hierarquia</h2>
+<p>Coloque o cargo do bot no topo da hierarquia.</p>
 </div>
 
 </section>
 
 <!-- COMANDOS -->
-<section id="cmds">
+<section id="cmds" class="section">
 
 <div class="categoria">Administração</div>
-
 <div class="cmd">/autorole <button class="copy-btn" onclick="copy('/autorole')">Copiar</button></div>
 <div class="cmd">/clear <button class="copy-btn" onclick="copy('/clear')">Copiar</button></div>
 <div class="cmd">/ban <button class="copy-btn" onclick="copy('/ban')">Copiar</button></div>
@@ -231,10 +238,7 @@ Depois de configurado, o Hydra estará pronto para automatizar seu servidor e of
 <div class="categoria">Economia</div>
 <div class="cmd">/cassino <button class="copy-btn" onclick="copy('/cassino')">Copiar</button></div>
 <div class="cmd">/coinflip <button class="copy-btn" onclick="copy('/coinflip')">Copiar</button></div>
-
-<div class="categoria">Utilidades</div>
-<div class="cmd">/ping <button class="copy-btn" onclick="copy('/ping')">Copiar</button></div>
-<div class="cmd">/hora <button class="copy-btn" onclick="copy('/hora')">Copiar</button></div>
+<div class="cmd">/reabastecer <button class="copy-btn" onclick="copy('/reabastecer')">Copiar</button></div>
 
 </section>
 
@@ -242,9 +246,8 @@ Depois de configurado, o Hydra estará pronto para automatizar seu servidor e of
 
 <script>
 function show(sec){
-document.getElementById('home').style.display='none';
-document.getElementById('cmds').style.display='none';
-document.getElementById(sec).style.display='block';
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById(sec).classList.add('active');
 }
 
 function copy(text){
