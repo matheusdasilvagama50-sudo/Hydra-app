@@ -7,30 +7,42 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI';}
-body{background:#020617;color:white;}
+body{background:#020617;color:white}
 
-header{display:flex;justify-content:space-between;padding:15px 20px;}
+/* HEADER */
+header{
+display:flex;
+justify-content:space-between;
+padding:15px 20px;
+}
 
 .logo{
 font-weight:bold;
-font-size:20px;
+font-size:22px;
 background:linear-gradient(90deg,#00f0ff,#7c3aed);
 -webkit-background-clip:text;
 color:transparent;
 }
 
-nav a{margin-left:15px;color:white;text-decoration:none;cursor:pointer;}
+nav a{
+margin-left:15px;
+color:white;
+cursor:pointer;
+text-decoration:none;
+}
 
+/* BANNER */
 .banner{
 text-align:center;
 padding:40px;
-font-size:26px;
+font-size:28px;
 font-weight:bold;
 background:linear-gradient(90deg,#00f0ff,#7c3aed);
 -webkit-background-clip:text;
 color:transparent;
 }
 
+/* HERO */
 .hero{text-align:center;padding:20px;}
 
 .btn{
@@ -39,10 +51,11 @@ margin-top:20px;
 padding:15px 25px;
 border-radius:10px;
 background:linear-gradient(90deg,#00f0ff,#7c3aed);
-text-decoration:none;
 color:white;
+text-decoration:none;
 }
 
+/* STATS */
 .stats{
 display:flex;
 justify-content:center;
@@ -50,8 +63,7 @@ gap:40px;
 margin-top:20px;
 }
 
-.features{padding:30px 20px;}
-
+/* CARDS */
 .card{
 background:#0f172a;
 padding:15px;
@@ -59,15 +71,51 @@ border-radius:10px;
 margin-top:10px;
 }
 
-.bot{text-align:center;margin-top:40px;}
-.bot img{width:240px;border-radius:50%;}
-.bot h2{margin-top:20px;font-size:28px;}
+/* BOT */
+.bot{
+text-align:center;
+margin-top:40px;
+}
 
-.instructions{padding:40px 20px;}
+.bot img{
+width:260px;
+border-radius:50%;
+box-shadow:0 0 30px #7c3aedaa;
+}
 
+.gradient-text{
+font-size:32px;
+margin-top:20px;
+background:linear-gradient(90deg,#00f0ff,#7c3aed);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+/* INSTRUÇÕES */
+.instructions{
+padding:40px 20px;
+}
+
+.instructions h2{
+font-size:26px;
+margin-top:25px;
+background:linear-gradient(90deg,#00f0ff,#7c3aed);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.instructions p{
+margin-top:10px;
+color:#ccc;
+line-height:1.8;
+font-size:15px;
+}
+
+/* SECTIONS */
 .section{display:none;}
 .active{display:block;}
 
+/* COMANDOS */
 .categoria{
 margin-top:20px;
 color:#00f0ff;
@@ -87,7 +135,11 @@ color:#aaa;
 margin-top:5px;
 }
 
-footer{text-align:center;padding:20px;color:#777;}
+footer{
+text-align:center;
+padding:20px;
+color:#777;
+}
 </style>
 </head>
 
@@ -97,7 +149,6 @@ footer{text-align:center;padding:20px;color:#777;}
 <div class="logo">Hydra</div>
 <nav>
 <a onclick="show('home')">Início</a>
-<a onclick="show('apresentacao')">Apresentação</a>
 <a onclick="show('cmds')">Comandos</a>
 </nav>
 </header>
@@ -106,6 +157,7 @@ footer{text-align:center;padding:20px;color:#777;}
 
 <!-- HOME -->
 <section id="home" class="section active">
+
 <div class="hero">
 <h1>Domine o Hydra Bot</h1>
 <p>Automação, economia e poder total no seu servidor</p>
@@ -123,71 +175,71 @@ Adicionar ao Discord
 </div>
 </div>
 
-<div class="features">
 <div class="card">🤖 Sistema avançado de automação</div>
 <div class="card">💰 Economia completa integrada</div>
 <div class="card">🎮 Sistema de diversão e interação</div>
-<div class="card">🛠 Ferramentas de administração poderosas</div>
-</div>
+<div class="card">🛠 Administração poderosa</div>
 
+<!-- IMAGEM -->
 <div class="bot">
 <img src="https://raw.githubusercontent.com/SEU-USUARIO/SEU-REPO/main/file_00000000245871f59969bbef1e57db3b.png">
-<h2>O FUTURO DA AUTOMAÇÃO COMEÇA COM O HYDRA 🚀</h2>
+<div class="gradient-text">O FUTURO DA AUTOMAÇÃO COMEÇA COM O HYDRA 🚀</div>
 </div>
 
+<!-- INSTRUÇÕES GRANDES -->
 <div class="instructions">
-<h2>Como usar</h2>
-<p>Adicione o bot, dê permissões e coloque no topo da hierarquia.</p>
+
+<h2>📌 Como adicionar o Hydra ao seu servidor</h2>
+<p>
+Para começar, clique no botão "Adicionar ao Discord". Você será redirecionado para o site oficial do Discord,
+onde poderá selecionar o servidor desejado. Após escolher, confirme as permissões solicitadas e finalize o processo.
+</p>
+
+<h2>🔐 Permissões do bot</h2>
+<p>
+O Hydra precisa de permissões administrativas para executar todas as suas funções corretamente.
+Isso inclui gerenciar mensagens, cargos, canais e automações.
+Sem essas permissões, diversas funções podem falhar ou não funcionar corretamente.
+</p>
+
+<h2>⚙️ Hierarquia do Hydra</h2>
+<p>
+Após adicionar o bot, vá até as configurações do servidor, acesse a aba de cargos e arraste o cargo do Hydra
+para o topo da hierarquia. Isso garante prioridade total para executar ações importantes dentro do servidor.
+</p>
+
+<h2>🚀 Resultado final</h2>
+<p>
+Depois de configurar corretamente, o Hydra estará pronto para transformar completamente seu servidor,
+oferecendo automação, controle e recursos avançados para sua comunidade.
+</p>
+
 </div>
+
 </section>
 
 <!-- COMANDOS -->
 <section id="cmds" class="section">
 
 <div class="categoria">Administração</div>
-<div class="cmd">/autorole <small>Define cargos automáticos para novos membros</small></div>
-<div class="cmd">/clear <small>Apaga mensagens rapidamente</small></div>
-<div class="cmd">/ban <small>Bane usuários do servidor</small></div>
+<div class="cmd">/autorole <small>Define cargos automáticos</small></div>
+<div class="cmd">/clear <small>Apaga mensagens</small></div>
+<div class="cmd">/ban <small>Bane usuários</small></div>
 <div class="cmd">/kick <small>Expulsa membros</small></div>
 <div class="cmd">/lock <small>Tranca canal</small></div>
 <div class="cmd">/unlock <small>Destranca canal</small></div>
 
 <div class="categoria">Economia</div>
-<div class="cmd">/cassino <small>Jogue e ganhe moedas</small></div>
+<div class="cmd">/cassino <small>Jogo de moedas</small></div>
 <div class="cmd">/coinflip <small>Cara ou coroa</small></div>
 <div class="cmd">/reabastecer <small>Recupera recursos</small></div>
 
 <div class="categoria">Utilidades</div>
-<div class="cmd">/ping <small>Mostra o ping do bot</small></div>
-<div class="cmd">/hora <small>Mostra horário atual</small></div>
+<div class="cmd">/ping <small>Mostra o ping</small></div>
+<div class="cmd">/hora <small>Horário atual</small></div>
 <div class="cmd">/calculadora <small>Faz cálculos</small></div>
 <div class="cmd">/traduzir <small>Traduz textos</small></div>
-<div class="cmd">/uptime <small>Tempo online do bot</small></div>
-
-<div class="categoria">Informações</div>
-<div class="cmd">/serverinfo <small>Informações do servidor</small></div>
-<div class="cmd">/user_info <small>Info do usuário</small></div>
-<div class="cmd">/cargo_info <small>Info de cargos</small></div>
-<div class="cmd">/hydra_info <small>Info do bot</small></div>
-
-<div class="categoria">Interação</div>
-<div class="cmd">/abraçar <small>Abraça alguém</small></div>
-<div class="cmd">/beijar <small>Beija alguém</small></div>
-<div class="cmd">/ship <small>Compatibilidade entre usuários</small></div>
-
-<div class="categoria">Sistema</div>
-<div class="cmd">/afk <small>Define status ausente</small></div>
-<div class="cmd">/lembrete <small>Cria lembretes</small></div>
-<div class="cmd">/dm <small>Envia mensagem privada</small></div>
-<div class="cmd">/say <small>Faz o bot falar</small></div>
-
-<div class="categoria">Extras</div>
-<div class="cmd">/embed <small>Cria embeds personalizados</small></div>
-<div class="cmd">/copy_emoji <small>Copia emojis</small></div>
-<div class="cmd">/cores <small>Define cores</small></div>
-<div class="cmd">/avatar <small>Mostra avatar</small></div>
-<div class="cmd">/entregar_cargo <small>Dá cargos</small></div>
-<div class="cmd">/enquete <small>Cria votação</small></div>
+<div class="cmd">/uptime <small>Tempo online</small></div>
 
 </section>
 
