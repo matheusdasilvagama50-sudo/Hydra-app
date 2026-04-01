@@ -71,24 +71,34 @@ border-radius:10px;
 margin-top:10px;
 }
 
-/* BOT */
-.bot{
-text-align:center;
-margin-top:40px;
-}
-
-.bot img{
-width:260px;
-border-radius:50%;
-box-shadow:0 0 30px #7c3aedaa;
-}
-
+/* TEXTO */
 .gradient-text{
-font-size:32px;
-margin-top:20px;
+text-align:center;
+font-size:28px;
+margin-top:30px;
 background:linear-gradient(90deg,#00f0ff,#7c3aed);
 -webkit-background-clip:text;
 color:transparent;
+}
+
+/* CAROUSEL */
+.carousel{
+margin-top:20px;
+overflow:hidden;
+white-space:nowrap;
+}
+
+.carousel img{
+width:60px;
+height:60px;
+border-radius:50%;
+margin:0 10px;
+animation:scroll 10s linear infinite;
+}
+
+@keyframes scroll{
+0%{transform:translateX(0)}
+100%{transform:translateX(-100%)}
 }
 
 /* INSTRUÇÕES */
@@ -97,18 +107,14 @@ padding:40px 20px;
 }
 
 .instructions h2{
-font-size:26px;
-margin-top:25px;
-background:linear-gradient(90deg,#00f0ff,#7c3aed);
--webkit-background-clip:text;
-color:transparent;
+margin-top:20px;
+color:#00f0ff;
 }
 
 .instructions p{
 margin-top:10px;
 color:#ccc;
-line-height:1.8;
-font-size:15px;
+line-height:1.6;
 }
 
 /* SECTIONS */
@@ -123,16 +129,31 @@ font-weight:bold;
 }
 
 .cmd{
+display:flex;
+justify-content:space-between;
+align-items:center;
 background:#0f172a;
 padding:12px;
 border-radius:8px;
 margin-top:8px;
 }
 
+.cmd-text{
+display:flex;
+flex-direction:column;
+}
+
 .cmd small{
-display:block;
 color:#aaa;
-margin-top:5px;
+}
+
+.copy-btn{
+background:#7c3aed;
+border:none;
+padding:6px 10px;
+border-radius:6px;
+color:white;
+cursor:pointer;
 }
 
 footer{
@@ -178,42 +199,27 @@ Adicionar ao Discord
 <div class="card">🤖 Sistema avançado de automação</div>
 <div class="card">💰 Economia completa integrada</div>
 <div class="card">🎮 Sistema de diversão e interação</div>
-<div class="card">🛠 Administração poderosa</div>
 
-<!-- IMAGEM -->
-<div class="bot">
-<img src="https://raw.githubusercontent.com/SEU-USUARIO/SEU-REPO/main/file_00000000245871f59969bbef1e57db3b.png">
 <div class="gradient-text">O FUTURO DA AUTOMAÇÃO COMEÇA COM O HYDRA 🚀</div>
+
+<!-- CAROUSEL SERVIDORES -->
+<div class="carousel">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
 </div>
 
-<!-- INSTRUÇÕES GRANDES -->
 <div class="instructions">
+<h2>Como adicionar o Hydra</h2>
+<p>Clique no botão acima, escolha seu servidor e confirme.</p>
 
-<h2>📌 Como adicionar o Hydra ao seu servidor</h2>
-<p>
-Para começar, clique no botão "Adicionar ao Discord". Você será redirecionado para o site oficial do Discord,
-onde poderá selecionar o servidor desejado. Após escolher, confirme as permissões solicitadas e finalize o processo.
-</p>
+<h2>Permissões</h2>
+<p>O Hydra precisa de permissões administrativas.</p>
 
-<h2>🔐 Permissões do bot</h2>
-<p>
-O Hydra precisa de permissões administrativas para executar todas as suas funções corretamente.
-Isso inclui gerenciar mensagens, cargos, canais e automações.
-Sem essas permissões, diversas funções podem falhar ou não funcionar corretamente.
-</p>
-
-<h2>⚙️ Hierarquia do Hydra</h2>
-<p>
-Após adicionar o bot, vá até as configurações do servidor, acesse a aba de cargos e arraste o cargo do Hydra
-para o topo da hierarquia. Isso garante prioridade total para executar ações importantes dentro do servidor.
-</p>
-
-<h2>🚀 Resultado final</h2>
-<p>
-Depois de configurar corretamente, o Hydra estará pronto para transformar completamente seu servidor,
-oferecendo automação, controle e recursos avançados para sua comunidade.
-</p>
-
+<h2>Hierarquia</h2>
+<p>Coloque o cargo do bot no topo.</p>
 </div>
 
 </section>
@@ -222,24 +228,30 @@ oferecendo automação, controle e recursos avançados para sua comunidade.
 <section id="cmds" class="section">
 
 <div class="categoria">Administração</div>
-<div class="cmd">/autorole <small>Define cargos automáticos</small></div>
-<div class="cmd">/clear <small>Apaga mensagens</small></div>
-<div class="cmd">/ban <small>Bane usuários</small></div>
-<div class="cmd">/kick <small>Expulsa membros</small></div>
-<div class="cmd">/lock <small>Tranca canal</small></div>
-<div class="cmd">/unlock <small>Destranca canal</small></div>
 
-<div class="categoria">Economia</div>
-<div class="cmd">/cassino <small>Jogo de moedas</small></div>
-<div class="cmd">/coinflip <small>Cara ou coroa</small></div>
-<div class="cmd">/reabastecer <small>Recupera recursos</small></div>
+<div class="cmd">
+<div class="cmd-text">
+/autorole
+<small>Define cargos automáticos</small>
+</div>
+<button class="copy-btn" onclick="copy('/autorole')">Copiar</button>
+</div>
 
-<div class="categoria">Utilidades</div>
-<div class="cmd">/ping <small>Mostra o ping</small></div>
-<div class="cmd">/hora <small>Horário atual</small></div>
-<div class="cmd">/calculadora <small>Faz cálculos</small></div>
-<div class="cmd">/traduzir <small>Traduz textos</small></div>
-<div class="cmd">/uptime <small>Tempo online</small></div>
+<div class="cmd">
+<div class="cmd-text">
+/clear
+<small>Apaga mensagens</small>
+</div>
+<button class="copy-btn" onclick="copy('/clear')">Copiar</button>
+</div>
+
+<div class="cmd">
+<div class="cmd-text">
+/ban
+<small>Bane usuários</small>
+</div>
+<button class="copy-btn" onclick="copy('/ban')">Copiar</button>
+</div>
 
 </section>
 
@@ -249,6 +261,11 @@ oferecendo automação, controle e recursos avançados para sua comunidade.
 function show(sec){
 document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
 document.getElementById(sec).classList.add('active');
+}
+
+function copy(text){
+navigator.clipboard.writeText(text);
+alert("Comando copiado: " + text);
 }
 </script>
 
