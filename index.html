@@ -2,115 +2,184 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hydra Bot</title>
 
 <style>
-body {
+* {
     margin: 0;
-    font-family: Arial;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
     display: flex;
-    background-color: #121212;
+    background: #0f0f0f;
     color: white;
 }
 
-/* MENU LATERAL */
+/* SIDEBAR */
 .sidebar {
-    width: 200px;
-    background: #1f1f1f;
-    padding: 20px;
+    width: 250px;
     height: 100vh;
+    background: #121212;
+    padding: 20px;
+    border-right: 1px solid #222;
+}
+
+.sidebar h2 {
+    color: #00ffff;
+    margin-bottom: 20px;
 }
 
 .sidebar button {
     width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    background: #2a2a3f;
-    color: white;
+    padding: 12px;
+    margin: 8px 0;
+    background: #1e1e1e;
     border: none;
+    color: white;
+    border-radius: 8px;
     cursor: pointer;
+    transition: 0.3s;
+}
+
+.sidebar button:hover {
+    background: #00ffff;
+    color: black;
+    box-shadow: 0 0 10px #00ffff;
 }
 
 /* CONTEÚDO */
 .content {
     flex: 1;
-    padding: 20px;
-    text-align: center;
+    padding: 30px;
 }
 
+/* HEADER */
 .banner {
     width: 100%;
-    max-height: 200px;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
 .avatar {
-    width: 120px;
+    width: 140px;
     border-radius: 50%;
-    margin-top: -60px;
+    margin-top: -70px;
+    border: 4px solid #00ffff;
+}
+
+.btn {
+    background: #00ffff;
+    color: black;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 15px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    box-shadow: 0 0 15px #00ffff;
+}
+
+/* CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
 }
 
 .card {
-    background: #2a2a3f;
-    padding: 10px;
-    margin: 10px;
+    background: #1a1a1a;
+    padding: 15px;
     border-radius: 10px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #00ffff;
+}
+
+/* SECTIONS */
+.section {
+    display: none;
+}
+
+.active {
+    display: block;
 }
 </style>
 
 <script>
-function mostrar(secao) {
-    document.getElementById("inicio").style.display = "none";
-    document.getElementById("comandos").style.display = "none";
-
-    document.getElementById(secao).style.display = "block";
+function trocar(secao) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(secao).classList.add('active');
 }
 </script>
 
 </head>
+
 <body>
 
 <!-- MENU -->
 <div class="sidebar">
     <h2>Hydra</h2>
-    <button onclick="mostrar('inicio')">Início</button>
-    <button onclick="mostrar('comandos')">Comandos</button>
+    <button onclick="trocar('inicio')">🏠 Início</button>
+    <button onclick="trocar('comandos')">📜 Comandos</button>
+    <button onclick="trocar('sobre')">ℹ️ Sobre</button>
 </div>
 
 <!-- CONTEÚDO -->
 <div class="content">
 
-    <!-- INICIO -->
-    <div id="inicio">
-        <img src="img/banner.png" class="banner">
+<!-- INICIO -->
+<div id="inicio" class="section active">
+    <img src="https://cdn.discordapp.com/attachments/1487780175147045114/1488883572134772947/file_00000000e37071f5bf0d668448a01fe5.png" class="banner">
+
+    <center>
         <img src="img/avatar.png" class="avatar">
         <h1>Hydra Bot</h1>
-        <p>Bot profissional para Discord ⚡</p>
+        <p>⚡ Sistema completo e profissional para Discord</p>
 
-        <a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&scope=bot&permissions=8">
-            <button>Adicionar ao Discord</button>
+        <a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&scope=bot&permissions=8" class="btn">
+            Adicionar ao Discord
         </a>
+    </center>
+</div>
+
+<!-- COMANDOS -->
+<div id="comandos" class="section">
+    <h1>📜 Comandos do Hydra</h1>
+
+    <div class="cards">
+
+        <div class="card"><h3>/hora</h3><p>Mostra a hora atual</p></div>
+        <div class="card"><h3>/coinflip</h3><p>Cara ou coroa</p></div>
+        <div class="card"><h3>/jokenpo</h3><p>Pedra papel tesoura</p></div>
+        <div class="card"><h3>/imagem_meme</h3><p>Envia meme aleatório</p></div>
+        <div class="card"><h3>/aniversariantes</h3><p>Lista aniversariantes</p></div>
+        <div class="card"><h3>/lock</h3><p>Trava canal</p></div>
+        <div class="card"><h3>/unlock</h3><p>Destrava canal</p></div>
+        <div class="card"><h3>/enquete</h3><p>Criar votação</p></div>
+        <div class="card"><h3>/status</h3><p>Status do bot</p></div>
+        <div class="card"><h3>/lembrete</h3><p>Criar lembrete</p></div>
+
     </div>
+</div>
 
-    <!-- COMANDOS -->
-    <div id="comandos" style="display:none;">
-        <h1>Comandos</h1>
-
-        <div class="card">
-            <h3>/hora</h3>
-            <p>Mostra a hora</p>
-        </div>
-
-        <div class="card">
-            <h3>/coinflip</h3>
-            <p>Cara ou coroa</p>
-        </div>
-
-        <div class="card">
-            <h3>/jokenpo</h3>
-            <p>Pedra papel tesoura</p>
-        </div>
-
-    </div>
+<!-- SOBRE -->
+<div id="sobre" class="section">
+    <h1>ℹ️ Sobre o Hydra</h1>
+    <p>Hydra é um bot completo com sistemas avançados para servidores Discord.</p>
+</div>
 
 </div>
 
