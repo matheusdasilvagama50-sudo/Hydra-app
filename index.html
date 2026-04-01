@@ -10,111 +10,54 @@
 body{background:#020617;color:white}
 
 /* HEADER */
-header{
-display:flex;
-justify-content:space-between;
-padding:15px;
-}
-
+header{display:flex;justify-content:space-between;padding:15px;}
 .logo{
-font-size:22px;
-font-weight:bold;
+font-size:22px;font-weight:bold;
 background:linear-gradient(90deg,#00f0ff,#7c3aed);
--webkit-background-clip:text;
-color:transparent;
+-webkit-background-clip:text;color:transparent;
 }
-
 nav a{margin-left:15px;cursor:pointer}
 
 /* BANNER */
 .banner{
-text-align:center;
-padding:40px;
-font-size:28px;
-font-weight:bold;
+text-align:center;padding:40px;font-size:28px;font-weight:bold;
 background:linear-gradient(90deg,#00f0ff,#7c3aed);
--webkit-background-clip:text;
-color:transparent;
+-webkit-background-clip:text;color:transparent;
 }
 
 /* HERO */
 .hero{text-align:center;padding:20px;}
-
-.buttons{
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
-margin-top:20px;
-}
-
+.buttons{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin-top:20px;}
 .btn{
-padding:15px 25px;
-border-radius:10px;
+padding:15px 25px;border-radius:10px;
 background:linear-gradient(90deg,#00f0ff,#7c3aed);
-text-decoration:none;
-color:white;
+color:white;text-decoration:none;
 }
 
 /* STATS */
-.stats{
-display:flex;
-justify-content:center;
-gap:40px;
-margin-top:20px;
-}
+.stats{display:flex;justify-content:center;gap:40px;margin-top:20px;}
 
 /* CARDS */
 .card{
-background:#0f172a;
-padding:15px;
-border-radius:10px;
-margin:10px;
+background:#0f172a;padding:15px;border-radius:10px;margin:10px;
 }
 
 /* TEXTO */
 .gradient-text{
-text-align:center;
-font-size:28px;
-margin-top:30px;
+text-align:center;font-size:28px;margin-top:30px;
 background:linear-gradient(90deg,#00f0ff,#7c3aed);
--webkit-background-clip:text;
-color:transparent;
-}
-
-/* CAROUSEL */
-.carousel{overflow:hidden;margin-top:20px;}
-.carousel-track{
-display:flex;
-width:200%;
-animation:scroll 15s linear infinite;
-}
-.carousel img{
-width:70px;
-height:70px;
-border-radius:50%;
-margin:10px;
-}
-
-@keyframes scroll{
-0%{transform:translateX(0)}
-100%{transform:translateX(-50%)}
+-webkit-background-clip:text;color:transparent;
 }
 
 /* INSTRUÇÕES */
 .instructions{padding:40px;}
 .instructions h2{
-font-size:26px;
-margin-top:25px;
+font-size:26px;margin-top:25px;
 background:linear-gradient(90deg,#00f0ff,#7c3aed);
--webkit-background-clip:text;
-color:transparent;
+-webkit-background-clip:text;color:transparent;
 }
 .instructions p{
-font-size:16px;
-line-height:1.8;
-margin-top:10px;
-color:#ccc;
+font-size:16px;line-height:1.8;margin-top:10px;color:#ccc;
 }
 
 /* SECTIONS */
@@ -122,20 +65,40 @@ color:#ccc;
 .active{display:block;}
 
 /* COMANDOS */
-.categoria{margin-top:20px;color:#00f0ff;}
+.categoria{
+margin-top:30px;
+font-size:20px;
+color:#00f0ff;
+}
+
 .cmd{
+background:#0f172a;
+padding:15px;
+border-radius:10px;
+margin-top:10px;
+}
+
+.cmd-header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-background:#0f172a;
-padding:12px;
-border-radius:8px;
-margin-top:8px;
 }
+
+.cmd-name{
+font-weight:bold;
+font-size:16px;
+}
+
+.cmd-desc{
+margin-top:8px;
+color:#aaa;
+font-size:14px;
+}
+
 .copy-btn{
 background:#7c3aed;
 border:none;
-padding:6px 10px;
+padding:6px 12px;
 border-radius:6px;
 color:white;
 cursor:pointer;
@@ -164,21 +127,9 @@ footer{text-align:center;padding:20px;color:#777;}
 <h1>Domine o Hydra Bot</h1>
 <p>Automação, economia e poder total</p>
 
-<!-- BOTÕES -->
 <div class="buttons">
-
-<a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&scope=bot%20applications.commands"
-target="_blank"
-class="btn">
-Adicionar ao Discord
-</a>
-
-<a href="https://discord.gg/Fr4usMy4E"
-target="_blank"
-class="btn">
-Servidor Suporte
-</a>
-
+<a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&scope=bot%20applications.commands" class="btn">Adicionar</a>
+<a href="https://discord.gg/Fr4usMy4E" class="btn">Servidor Suporte</a>
 </div>
 
 <div class="stats">
@@ -188,38 +139,29 @@ Servidor Suporte
 </div>
 </div>
 
-<div class="card">🤖 Automação avançada</div>
-<div class="card">💰 Sistema de economia</div>
+<div class="card">🤖 Sistema avançado de automação</div>
+<div class="card">💰 Economia completa integrada</div>
 <div class="card">🛠 Administração poderosa</div>
 
 <div class="gradient-text">O FUTURO DA AUTOMAÇÃO COMEÇA COM O HYDRA 🚀</div>
 
-<!-- CAROUSEL -->
-<div class="carousel">
-<div class="carousel-track">
-
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
-
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
-
-</div>
-</div>
-
 <div class="instructions">
+
 <h2>📌 Como adicionar o Hydra</h2>
-<p>Clique em "Adicionar ao Discord", escolha o servidor e confirme.</p>
+<p>
+Clique no botão "Adicionar", escolha o servidor e confirme todas as permissões necessárias.
+</p>
 
 <h2>🔐 Permissões</h2>
-<p>O Hydra precisa de permissões administrativas.</p>
+<p>
+O bot precisa de permissões administrativas para executar corretamente todas as funções.
+</p>
 
 <h2>⚙️ Hierarquia</h2>
-<p>Coloque o cargo do bot no topo da hierarquia.</p>
+<p>
+Coloque o cargo do Hydra no topo da hierarquia para garantir funcionamento total.
+</p>
+
 </div>
 
 </section>
@@ -228,17 +170,82 @@ Servidor Suporte
 <section id="cmds" class="section">
 
 <div class="categoria">Administração</div>
-<div class="cmd">/autorole <button class="copy-btn" onclick="copy('/autorole')">Copiar</button></div>
-<div class="cmd">/clear <button class="copy-btn" onclick="copy('/clear')">Copiar</button></div>
-<div class="cmd">/ban <button class="copy-btn" onclick="copy('/ban')">Copiar</button></div>
-<div class="cmd">/kick <button class="copy-btn" onclick="copy('/kick')">Copiar</button></div>
-<div class="cmd">/lock <button class="copy-btn" onclick="copy('/lock')">Copiar</button></div>
-<div class="cmd">/unlock <button class="copy-btn" onclick="copy('/unlock')">Copiar</button></div>
+
+<div class="cmd">
+<div class="cmd-header">
+<span class="cmd-name">/autorole</span>
+<button class="copy-btn" onclick="copy('/autorole')">Copiar</button>
+</div>
+<div class="cmd-desc">Serve para dar cargos automáticos para novos usuários.</div>
+</div>
+
+<div class="cmd">
+<div class="cmd-header">
+<span class="cmd-name">/clear</span>
+<button class="copy-btn" onclick="copy('/clear')">Copiar</button>
+</div>
+<div class="cmd-desc">Apaga mensagens rapidamente de um canal.</div>
+</div>
+
+<div class="cmd">
+<div class="cmd-header">
+<span class="cmd-name">/ban</span>
+<button class="copy-btn" onclick="copy('/ban')">Copiar</button>
+</div>
+<div class="cmd-desc">Bane usuários do servidor com motivo.</div>
+</div>
+
+<div class="cmd">
+<div class="cmd-header">
+<span class="cmd-name">/kick</span>
+<button class="copy-btn" onclick="copy('/kick')">Copiar</button>
+</div>
+<div class="cmd-desc">Expulsa um membro do servidor.</div>
+</div>
+
+<div class="cmd">
+<div class="cmd-header">
+<span class="cmd-name">/lock</span>
+<button class="copy-btn" onclick="copy('/lock')">Copiar</button>
+</div>
+<div class="cmd-desc">Tranca o canal impedindo envio de mensagens.</div>
+</div>
+
+<div class="cmd">
+<div class="cmd-header">
+<span class="cmd-name">/unlock</span>
+<button class="copy-btn" onclick="copy('/unlock')">Copiar</button>
+</div>
+<div class="cmd-desc">Destranca o canal permitindo mensagens novamente.</div>
+</div>
 
 <div class="categoria">Economia</div>
-<div class="cmd">/cassino <button class="copy-btn" onclick="copy('/cassino')">Copiar</button></div>
-<div class="cmd">/coinflip <button class="copy-btn" onclick="copy('/coinflip')">Copiar</button></div>
-<div class="cmd">/reabastecer <button class="copy-btn" onclick="copy('/reabastecer')">Copiar</button></div>
+
+<div class="cmd">
+<div class="cmd-header">
+<span class="cmd-name">/cassino</span>
+<button class="copy-btn" onclick="copy('/cassino')">Copiar</button>
+</div>
+<div class="cmd-desc">Sistema de apostas e economia dentro do servidor.</div>
+</div>
+
+<div class="cmd">
+<div class="cmd-header">
+<span class="cmd-name">/coinflip</span>
+<button class="copy-btn" onclick="copy('/coinflip')">Copiar</button>
+</div>
+<div class="cmd-desc">Jogue cara ou coroa e teste sua sorte.</div>
+</div>
+
+<div class="cmd">
+<div class="cmd-header">
+<span class="cmd-name">/reabastecer</span>
+<button class="copy-btn" onclick="copy('/reabastecer')">Copiar</button>
+</div>
+<div class="cmd-desc">Recupera recursos dentro do sistema do bot.</div>
+</div>
+
+<!-- CONTINUA... (todos os outros seguem o mesmo padrão) -->
 
 </section>
 
