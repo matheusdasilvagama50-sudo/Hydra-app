@@ -7,14 +7,17 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI';}
-body{background:#020617;color:white}
+
+body{
+background:#020617;
+color:white;
+}
 
 /* HEADER */
 header{
 display:flex;
 justify-content:space-between;
 padding:15px 20px;
-background:#020617;
 }
 
 .logo{
@@ -29,23 +32,24 @@ nav a{
 margin-left:15px;
 text-decoration:none;
 color:white;
+cursor:pointer;
 }
 
-/* BANNER ANIMADO */
+/* BANNER SUAVE */
 .banner{
 text-align:center;
-padding:60px 20px;
+padding:50px 20px;
 font-size:28px;
 font-weight:bold;
 background:linear-gradient(90deg,#00f0ff,#7c3aed);
 -webkit-background-clip:text;
 color:transparent;
-animation: mover 3s infinite alternate;
+animation: fadeMove 4s infinite alternate ease-in-out;
 }
 
-@keyframes mover{
-0%{letter-spacing:1px}
-100%{letter-spacing:6px}
+@keyframes fadeMove{
+0%{opacity:0.6; transform:translateY(0)}
+100%{opacity:1; transform:translateY(5px)}
 }
 
 /* HERO */
@@ -53,6 +57,10 @@ animation: mover 3s infinite alternate;
 text-align:center;
 padding:20px;
 }
+
+.hero h1{font-size:26px;}
+
+.hero p{color:#aaa;margin-top:10px;}
 
 .btn{
 display:inline-block;
@@ -62,18 +70,35 @@ border-radius:10px;
 background:linear-gradient(90deg,#00f0ff,#7c3aed);
 text-decoration:none;
 color:white;
+transition:0.3s;
 }
 
-/* SEÇÕES */
-.section{padding:30px 20px;display:none;}
-.active{display:block;}
+.btn:hover{
+transform:scale(1.05);
+box-shadow:0 0 15px #7c3aed88;
+}
+
+/* FEATURES */
+.features{
+padding:30px 20px;
+}
 
 .card{
 background:#0f172a;
 padding:15px;
 border-radius:10px;
 margin-top:10px;
+transition:0.3s;
 }
+
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 10px #00f0ff33;
+}
+
+/* SEÇÕES */
+.section{display:none;}
+.active{display:block;}
 
 /* COMANDOS */
 .categoria{
@@ -90,7 +115,11 @@ margin-top:5px;
 }
 
 /* FOOTER */
-footer{text-align:center;padding:20px;color:#777}
+footer{
+text-align:center;
+padding:20px;
+color:#777;
+}
 </style>
 </head>
 
@@ -99,9 +128,9 @@ footer{text-align:center;padding:20px;color:#777}
 <header>
 <div class="logo">Hydra</div>
 <nav>
-<a href="#" onclick="show('home')">Início</a>
-<a href="#" onclick="show('apresentacao')">Apresentação</a>
-<a href="#" onclick="show('cmds')">Comandos</a>
+<a onclick="show('home')">Início</a>
+<a onclick="show('apresentacao')">Apresentação</a>
+<a onclick="show('cmds')">Comandos</a>
 </nav>
 </header>
 
@@ -112,46 +141,64 @@ Hydra Tecnologias Avançadas
 
 <!-- HOME -->
 <section id="home" class="section active">
+
 <div class="hero">
 <h1>Domine o Hydra Bot</h1>
 <p>Automação, economia e poder total no seu servidor</p>
 
-<a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&scope=bot%20applications.commands" target="_blank" class="btn">
+<a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&scope=bot%20applications.commands"
+target="_blank"
+class="btn">
 Adicionar ao Discord
 </a>
+
 </div>
+
+<div class="features">
+
+<div class="card">🤖 Sistema avançado de automação</div>
+<div class="card">💰 Economia completa integrada</div>
+<div class="card">🎮 Sistema de diversão e interação</div>
+<div class="card">🛠 Ferramentas de administração poderosas</div>
+<div class="card">⚡ Alta performance e estabilidade</div>
+
+</div>
+
 </section>
 
 <!-- APRESENTAÇÃO -->
 <section id="apresentacao" class="section">
+
+<div class="features">
+
 <div class="card">
 <h2>Sobre o Hydra</h2>
 
 <p>
 O Hydra foi criado com o objetivo de revolucionar a forma como servidores do Discord são administrados.
-Desde o início, o foco sempre foi trazer tecnologia avançada, automação inteligente e ferramentas poderosas
-para facilitar a vida de administradores e proporcionar uma experiência única aos usuários.
 
-Diferente de bots comuns, o Hydra combina desempenho, estabilidade e inovação.
-Cada sistema foi pensado para ser rápido, eficiente e fácil de usar, garantindo que qualquer comunidade,
-independente do tamanho, possa evoluir com segurança e organização.
+Desde o início, o foco foi trazer tecnologia avançada, automação inteligente e ferramentas modernas,
+permitindo que qualquer servidor tenha controle total com facilidade.
 
-Hoje, o Hydra já está presente em diversos servidores, mostrando seu potencial e crescimento constante.
-Atualmente contamos com:
+Diferente de bots comuns, o Hydra oferece desempenho, estabilidade e inovação constante.
+Cada sistema foi pensado para ser rápido, eficiente e simples de usar.
+
+Atualmente o Hydra conta com:
 
 ✔ 6 Servidores  
-✔ 6 Usuários ativos  
-✔ Mais de 40 Comandos  
+✔ 6 Usuários  
+✔ +40 Comandos  
 
 E isso é apenas o começo.
 
-Nosso objetivo é transformar o Hydra em uma das maiores plataformas de automação do Discord,
-trazendo atualizações constantes, novos sistemas e melhorias contínuas.
-
-Se você busca controle, desempenho e inovação, o Hydra é a escolha certa.
+Nosso objetivo é evoluir continuamente, trazendo novos sistemas e melhorias para transformar o Hydra
+em uma das maiores plataformas do Discord.
 </p>
 
 </div>
+
+</div>
+
 </section>
 
 <!-- COMANDOS -->
@@ -204,7 +251,11 @@ Se você busca controle, desempenho e inovação, o Hydra é a escolha certa.
 
 </section>
 
-<footer>© Hydra Bot</footer>
+<footer>
+<a href="https://Hydra.app/" style="color:#777;text-decoration:none;">
+Hydra.app
+</a>
+</footer>
 
 <script>
 function show(sec){
