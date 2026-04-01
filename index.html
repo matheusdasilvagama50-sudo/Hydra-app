@@ -7,7 +7,6 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI';}
-
 body{background:#020617;color:white;}
 
 /* HEADER */
@@ -18,8 +17,8 @@ padding:15px 20px;
 }
 
 .logo{
-font-weight:bold;
 font-size:20px;
+font-weight:bold;
 background:linear-gradient(90deg,#00f0ff,#7c3aed);
 -webkit-background-clip:text;
 color:transparent;
@@ -35,18 +34,12 @@ cursor:pointer;
 /* BANNER */
 .banner{
 text-align:center;
-padding:40px 20px;
+padding:40px;
 font-size:26px;
 font-weight:bold;
 background:linear-gradient(90deg,#00f0ff,#7c3aed);
 -webkit-background-clip:text;
 color:transparent;
-animation:fade 3s infinite alternate;
-}
-
-@keyframes fade{
-0%{opacity:0.6}
-100%{opacity:1}
 }
 
 /* HERO */
@@ -70,10 +63,6 @@ gap:40px;
 margin-top:20px;
 }
 
-.stats div{
-text-align:center;
-}
-
 /* FEATURES */
 .features{padding:30px 20px;}
 
@@ -84,21 +73,40 @@ border-radius:10px;
 margin-top:10px;
 }
 
-/* BOT IMAGE */
+/* BOT */
 .bot{
 text-align:center;
-margin-top:30px;
+margin-top:40px;
 }
 
 .bot img{
-width:120px;
+width:220px;
 border-radius:50%;
-box-shadow:0 0 20px #7c3aed88;
+box-shadow:0 0 25px #7c3aedaa;
 }
 
-.bot p{
+.bot h2{
+margin-top:20px;
+font-size:28px;
+background:linear-gradient(90deg,#00f0ff,#7c3aed);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+/* INSTRUÇÕES */
+.instructions{
+padding:40px 20px;
+}
+
+.instructions h2{
+margin-bottom:15px;
+color:#00f0ff;
+}
+
+.instructions p{
 margin-top:10px;
-color:#aaa;
+color:#ccc;
+line-height:1.6;
 }
 
 /* SECTIONS */
@@ -153,19 +161,11 @@ class="btn">
 Adicionar ao Discord
 </a>
 
-<!-- STATS -->
 <div class="stats">
-<div>
-<b>6</b><br>Servidores
+<div><b>6</b><br>Servidores</div>
+<div><b>6</b><br>Usuários</div>
+<div><b>+40</b><br>Comandos</div>
 </div>
-<div>
-<b>6</b><br>Usuários
-</div>
-<div>
-<b>+40</b><br>Comandos
-</div>
-</div>
-
 </div>
 
 <div class="features">
@@ -175,10 +175,51 @@ Adicionar ao Discord
 <div class="card">🛠 Ferramentas de administração poderosas</div>
 </div>
 
-<!-- BOT IMG + FRASE -->
+<!-- BOT DESTAQUE -->
 <div class="bot">
-<img src="https://cdn.discordapp.com/attachments/1487780175147045114/1488936387670577325/file_00000000245871f59969bbef1e57db3b.png?ex=69ce9791&is=69cd4611&hm=d78730aa706d4eb90583768a15a89903e1f3fff823a6d0073ea1b71403f3b7f1&">
-<p>O futuro da automação começa com o Hydra 🚀</p>
+<img src="https://cdn.discordapp.com/attachments/1487780175147045114/1488936387670577325/file_00000000245871f59969bbef1e57db3b.png">
+<h2>O FUTURO DA AUTOMAÇÃO COMEÇA COM O HYDRA 🚀</h2>
+</div>
+
+<!-- INSTRUÇÕES -->
+<div class="instructions">
+
+<h2>📌 Como adicionar o Hydra ao seu servidor</h2>
+
+<p>
+Para começar, clique no botão "Adicionar ao Discord" no topo da página.
+Você será redirecionado para o site oficial do Discord, onde poderá escolher
+em qual servidor deseja adicionar o Hydra.
+</p>
+
+<h2>🔐 Permissões necessárias</h2>
+
+<p>
+O Hydra precisa de permissões administrativas para funcionar corretamente.
+Isso inclui gerenciar mensagens, cargos, canais e executar automações.
+Sem essas permissões, alguns comandos podem não funcionar como esperado.
+</p>
+
+<h2>⚙️ Hierarquia do bot</h2>
+
+<p>
+Após adicionar o bot, vá até as configurações do servidor, abra a lista de cargos
+e arraste o cargo do Hydra para o topo da hierarquia.
+
+Isso garante que ele tenha prioridade sobre outros cargos e consiga executar
+todas as ações corretamente, como moderação, automação e gerenciamento.
+</p>
+
+<h2>🚀 Conclusão</h2>
+
+<p>
+Depois de configurar tudo corretamente, o Hydra estará pronto para transformar
+seu servidor em um ambiente automatizado, organizado e extremamente eficiente.
+
+A partir desse ponto, você terá controle total e poderá explorar todos os recursos
+avançados que o bot oferece.
+</p>
+
 </div>
 
 </section>
@@ -189,10 +230,8 @@ Adicionar ao Discord
 <div class="card">
 <h2>Sobre o Hydra</h2>
 <p>
-O Hydra foi criado com o objetivo de revolucionar servidores do Discord.
-
-Com tecnologia avançada e sistemas modernos, o Hydra oferece automação,
-economia e controle total para qualquer comunidade.
+O Hydra foi criado para revolucionar o Discord com tecnologia avançada,
+automação inteligente e desempenho extremo.
 
 ✔ 6 Servidores  
 ✔ 6 Usuários  
@@ -206,7 +245,6 @@ E isso é apenas o começo.
 
 <!-- COMANDOS -->
 <section id="cmds" class="section">
-
 <div class="categoria">Administração</div>
 <div class="cmd">/autorole</div>
 <div class="cmd">/clear</div>
@@ -251,12 +289,9 @@ E isso é apenas o começo.
 <div class="cmd">/avatar</div>
 <div class="cmd">/entregar_cargo</div>
 <div class="cmd">/enquete</div>
-
 </section>
 
-<footer>
-Hydra.app
-</footer>
+<footer>Hydra.app</footer>
 
 <script>
 function show(sec){
