@@ -8,10 +8,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI';}
 
-body{
-background:#020617;
-color:white;
-}
+body{background:#020617;color:white;}
 
 /* HEADER */
 header{
@@ -30,37 +27,30 @@ color:transparent;
 
 nav a{
 margin-left:15px;
-text-decoration:none;
 color:white;
+text-decoration:none;
 cursor:pointer;
 }
 
-/* BANNER SUAVE */
+/* BANNER */
 .banner{
 text-align:center;
-padding:50px 20px;
-font-size:28px;
+padding:40px 20px;
+font-size:26px;
 font-weight:bold;
 background:linear-gradient(90deg,#00f0ff,#7c3aed);
 -webkit-background-clip:text;
 color:transparent;
-animation: fadeMove 4s infinite alternate ease-in-out;
+animation:fade 3s infinite alternate;
 }
 
-@keyframes fadeMove{
-0%{opacity:0.6; transform:translateY(0)}
-100%{opacity:1; transform:translateY(5px)}
+@keyframes fade{
+0%{opacity:0.6}
+100%{opacity:1}
 }
 
 /* HERO */
-.hero{
-text-align:center;
-padding:20px;
-}
-
-.hero h1{font-size:26px;}
-
-.hero p{color:#aaa;margin-top:10px;}
+.hero{text-align:center;padding:20px;}
 
 .btn{
 display:inline-block;
@@ -70,33 +60,48 @@ border-radius:10px;
 background:linear-gradient(90deg,#00f0ff,#7c3aed);
 text-decoration:none;
 color:white;
-transition:0.3s;
 }
 
-.btn:hover{
-transform:scale(1.05);
-box-shadow:0 0 15px #7c3aed88;
+/* STATS */
+.stats{
+display:flex;
+justify-content:center;
+gap:40px;
+margin-top:20px;
+}
+
+.stats div{
+text-align:center;
 }
 
 /* FEATURES */
-.features{
-padding:30px 20px;
-}
+.features{padding:30px 20px;}
 
 .card{
 background:#0f172a;
 padding:15px;
 border-radius:10px;
 margin-top:10px;
-transition:0.3s;
 }
 
-.card:hover{
-transform:translateY(-5px);
-box-shadow:0 0 10px #00f0ff33;
+/* BOT IMAGE */
+.bot{
+text-align:center;
+margin-top:30px;
 }
 
-/* SEÇÕES */
+.bot img{
+width:120px;
+border-radius:50%;
+box-shadow:0 0 20px #7c3aed88;
+}
+
+.bot p{
+margin-top:10px;
+color:#aaa;
+}
+
+/* SECTIONS */
 .section{display:none;}
 .active{display:block;}
 
@@ -114,7 +119,6 @@ border-radius:8px;
 margin-top:5px;
 }
 
-/* FOOTER */
 footer{
 text-align:center;
 padding:20px;
@@ -134,10 +138,7 @@ color:#777;
 </nav>
 </header>
 
-<!-- BANNER -->
-<div class="banner">
-Hydra Tecnologias Avançadas
-</div>
+<div class="banner">Hydra Tecnologias Avançadas</div>
 
 <!-- HOME -->
 <section id="home" class="section active">
@@ -152,53 +153,55 @@ class="btn">
 Adicionar ao Discord
 </a>
 
+<!-- STATS -->
+<div class="stats">
+<div>
+<b>6</b><br>Servidores
+</div>
+<div>
+<b>6</b><br>Usuários
+</div>
+<div>
+<b>+40</b><br>Comandos
+</div>
+</div>
+
 </div>
 
 <div class="features">
-
 <div class="card">🤖 Sistema avançado de automação</div>
 <div class="card">💰 Economia completa integrada</div>
 <div class="card">🎮 Sistema de diversão e interação</div>
 <div class="card">🛠 Ferramentas de administração poderosas</div>
-<div class="card">⚡ Alta performance e estabilidade</div>
+</div>
 
+<!-- BOT IMG + FRASE -->
+<div class="bot">
+<img src="https://cdn.discordapp.com/attachments/1487780175147045114/1488936387670577325/file_00000000245871f59969bbef1e57db3b.png?ex=69ce9791&is=69cd4611&hm=d78730aa706d4eb90583768a15a89903e1f3fff823a6d0073ea1b71403f3b7f1&">
+<p>O futuro da automação começa com o Hydra 🚀</p>
 </div>
 
 </section>
 
 <!-- APRESENTAÇÃO -->
 <section id="apresentacao" class="section">
-
 <div class="features">
-
 <div class="card">
 <h2>Sobre o Hydra</h2>
-
 <p>
-O Hydra foi criado com o objetivo de revolucionar a forma como servidores do Discord são administrados.
+O Hydra foi criado com o objetivo de revolucionar servidores do Discord.
 
-Desde o início, o foco foi trazer tecnologia avançada, automação inteligente e ferramentas modernas,
-permitindo que qualquer servidor tenha controle total com facilidade.
-
-Diferente de bots comuns, o Hydra oferece desempenho, estabilidade e inovação constante.
-Cada sistema foi pensado para ser rápido, eficiente e simples de usar.
-
-Atualmente o Hydra conta com:
+Com tecnologia avançada e sistemas modernos, o Hydra oferece automação,
+economia e controle total para qualquer comunidade.
 
 ✔ 6 Servidores  
 ✔ 6 Usuários  
 ✔ +40 Comandos  
 
 E isso é apenas o começo.
-
-Nosso objetivo é evoluir continuamente, trazendo novos sistemas e melhorias para transformar o Hydra
-em uma das maiores plataformas do Discord.
 </p>
-
 </div>
-
 </div>
-
 </section>
 
 <!-- COMANDOS -->
@@ -252,9 +255,7 @@ em uma das maiores plataformas do Discord.
 </section>
 
 <footer>
-<a href="https://Hydra.app/" style="color:#777;text-decoration:none;">
 Hydra.app
-</a>
 </footer>
 
 <script>
