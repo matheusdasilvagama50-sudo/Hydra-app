@@ -6,182 +6,253 @@
 <title>Hydra Bot</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI';}
 
 body {
-    display: flex;
-    background: #0f0f0f;
-    color: white;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: white;
 }
 
-/* SIDEBAR */
-.sidebar {
-    width: 250px;
-    height: 100vh;
-    background: #121212;
-    padding: 20px;
-    border-right: 1px solid #222;
-}
-
-.sidebar h2 {
-    color: #00ffff;
-    margin-bottom: 20px;
-}
-
-.sidebar button {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    background: #1e1e1e;
-    border: none;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.sidebar button:hover {
-    background: #00ffff;
-    color: black;
-    box-shadow: 0 0 10px #00ffff;
-}
-
-/* CONTEÚDO */
-.content {
-    flex: 1;
-    padding: 30px;
+/* FUNDO */
+body::before {
+  content:"";
+  position:fixed;
+  width:100%;
+  height:100%;
+  background-image: radial-gradient(#ffffff22 1px, transparent 1px);
+  background-size:30px 30px;
+  z-index:-1;
 }
 
 /* HEADER */
-.banner {
-    width: 100%;
-    max-height: 220px;
-    object-fit: cover;
-    border-radius: 12px;
+header {
+  display:flex;
+  justify-content:space-between;
+  padding:15px 20px;
 }
 
-.avatar {
-    width: 140px;
-    border-radius: 50%;
-    margin-top: -70px;
-    border: 4px solid #00ffff;
+.logo {
+  font-weight:bold;
+  font-size:20px;
+  background: linear-gradient(90deg,#00f0ff,#7c3aed);
+  -webkit-background-clip:text;
+  color:transparent;
 }
+
+.menu-btn {font-size:24px;cursor:pointer;}
+
+.menu {
+  position:fixed;
+  top:0;
+  left:-100%;
+  width:75%;
+  height:100%;
+  background:#020617;
+  padding:20px;
+  transition:.3s;
+}
+
+.menu.active {left:0;}
+
+.menu a {
+  display:block;
+  padding:15px;
+  margin-top:10px;
+  border-radius:10px;
+  text-decoration:none;
+  color:white;
+}
+
+/* HERO */
+.hero {
+  text-align:center;
+  padding:60px 20px;
+}
+
+.hero h1 {font-size:32px;}
+
+.hero span {
+  background: linear-gradient(90deg,#00f0ff,#7c3aed);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero p {color:#aaa;margin-top:10px;}
 
 .btn {
-    background: #00ffff;
-    color: black;
-    padding: 12px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 15px;
-    font-weight: bold;
-    transition: 0.3s;
+  display:block;
+  margin:15px auto;
+  padding:15px;
+  border-radius:12px;
+  text-decoration:none;
+  text-align:center;
+  width:90%;
+  max-width:300px;
+  transition:.3s;
 }
 
-.btn:hover {
-    box-shadow: 0 0 15px #00ffff;
+.btn-primary {
+  background: linear-gradient(90deg,#00f0ff,#7c3aed);
+}
+
+.btn-primary:hover {
+  transform:scale(1.05);
+  box-shadow:0 0 20px #7c3aed88;
+}
+
+.btn-outline {
+  border:1px solid #334155;
+}
+
+/* STATS */
+.stats {
+  display:flex;
+  justify-content:space-around;
+  margin-top:25px;
 }
 
 /* CARDS */
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
-}
+.section {padding:30px 20px;}
 
 .card {
-    background: #1a1a1a;
-    padding: 15px;
-    border-radius: 10px;
-    transition: 0.3s;
+  background:#0f172a;
+  padding:20px;
+  border-radius:15px;
+  margin-top:15px;
+  transition:.3s;
 }
 
 .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 10px #00ffff;
+  transform:translateY(-5px);
+  box-shadow:0 0 15px #00f0ff33;
 }
 
-/* SECTIONS */
-.section {
-    display: none;
+/* COMANDOS */
+input {
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  margin-top:15px;
+  background:#020617;
+  color:white;
 }
 
-.active {
-    display: block;
+.categoria {
+  margin-top:25px;
+  color:#00f0ff;
+  font-weight:bold;
+}
+
+.cmd {
+  background:#0f172a;
+  padding:15px;
+  border-radius:12px;
+  margin-top:10px;
+}
+
+footer {
+  text-align:center;
+  padding:30px;
+  color:#777;
 }
 </style>
-
-<script>
-function trocar(secao) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.getElementById(secao).classList.add('active');
-}
-</script>
-
 </head>
 
 <body>
 
-<!-- MENU -->
-<div class="sidebar">
-    <h2>Hydra</h2>
-    <button onclick="trocar('inicio')">🏠 Início</button>
-    <button onclick="trocar('comandos')">📜 Comandos</button>
-    <button onclick="trocar('sobre')">ℹ️ Sobre</button>
+<header>
+  <div class="logo">Hydra</div>
+  <div class="menu-btn" onclick="openMenu()">☰</div>
+</header>
+
+<div id="menu" class="menu">
+  <div onclick="closeMenu()">✖</div>
+  <a href="#">Início</a>
+  <a href="#cmds">Comandos</a>
 </div>
 
-<!-- CONTEÚDO -->
-<div class="content">
+<section class="hero">
+  <h1>Domine o <span>Hydra Bot</span></h1>
+  <p>Automação, economia e poder total no seu servidor.</p>
 
-<!-- INICIO -->
-<div id="inicio" class="section active">
-    <img src="https://cdn.discordapp.com/attachments/1487780175147045114/1488883572134772947/file_00000000e37071f5bf0d668448a01fe5.png" class="banner">
+  <!-- BOTÃO PRINCIPAL -->
+  <a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&scope=bot%20applications.commands" 
+     target="_blank" 
+     class="btn btn-primary">
+     🤖 Adicionar Hydra ao Discord
+  </a>
 
-    <center>
-        <img src="img/avatar.png" class="avatar">
-        <h1>Hydra Bot</h1>
-        <p>⚡ Sistema completo e profissional para Discord</p>
+  <a href="#cmds" class="btn btn-outline">Ver Comandos</a>
 
-        <a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&scope=bot&permissions=8" class="btn">
-            Adicionar ao Discord
-        </a>
-    </center>
-</div>
+  <div class="stats">
+    <div><b>25K+</b><br>Servidores</div>
+    <div><b>1M+</b><br>Usuários</div>
+    <div><b>40+</b><br>Comandos</div>
+  </div>
+</section>
 
-<!-- COMANDOS -->
-<div id="comandos" class="section">
-    <h1>📜 Comandos do Hydra</h1>
+<section class="section">
+  <div class="card">🤖 IA avançada integrada</div>
+  <div class="card">💰 Sistema de economia completo</div>
+  <div class="card">🎮 Jogos e diversão</div>
+  <div class="card">🛠 Administração poderosa</div>
 
-    <div class="cards">
+  <!-- SEGUNDO BOTÃO -->
+  <a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&scope=bot%20applications.commands" 
+     target="_blank" 
+     class="btn btn-primary">
+     🚀 Adicionar Agora
+  </a>
+</section>
 
-        <div class="card"><h3>/hora</h3><p>Mostra a hora atual</p></div>
-        <div class="card"><h3>/coinflip</h3><p>Cara ou coroa</p></div>
-        <div class="card"><h3>/jokenpo</h3><p>Pedra papel tesoura</p></div>
-        <div class="card"><h3>/imagem_meme</h3><p>Envia meme aleatório</p></div>
-        <div class="card"><h3>/aniversariantes</h3><p>Lista aniversariantes</p></div>
-        <div class="card"><h3>/lock</h3><p>Trava canal</p></div>
-        <div class="card"><h3>/unlock</h3><p>Destrava canal</p></div>
-        <div class="card"><h3>/enquete</h3><p>Criar votação</p></div>
-        <div class="card"><h3>/status</h3><p>Status do bot</p></div>
-        <div class="card"><h3>/lembrete</h3><p>Criar lembrete</p></div>
+<section id="cmds" class="section">
+  <h2>Comandos</h2>
+  <input id="search" placeholder="Pesquisar..." onkeyup="searchCmd()">
+  <div id="list"></div>
+</section>
 
-    </div>
-</div>
+<footer>© Hydra Bot</footer>
 
-<!-- SOBRE -->
-<div id="sobre" class="section">
-    <h1>ℹ️ Sobre o Hydra</h1>
-    <p>Hydra é um bot completo com sistemas avançados para servidores Discord.</p>
-</div>
+<script>
+const cmds = {
+  Administração: [
+    {nome:"/embed criar",desc:"Cria embeds"},
+    {nome:"/container criar",desc:"Cria containers"}
+  ],
+  Utilidades: [
+    {nome:"/ping",desc:"Mostra o ping"}
+  ]
+};
 
-</div>
+function render() {
+  let html = "";
+  for (let cat in cmds) {
+    html += `<div class="categoria">${cat}</div>`;
+    cmds[cat].forEach(c=>{
+      html += `<div class="cmd"><b>${c.nome}</b><br>${c.desc}</div>`;
+    });
+  }
+  document.getElementById("list").innerHTML = html;
+}
+
+function searchCmd(){
+  let val = document.getElementById("search").value.toLowerCase();
+  document.querySelectorAll(".cmd").forEach(c=>{
+    c.style.display = c.innerText.toLowerCase().includes(val) ? "block":"none";
+  });
+}
+
+function openMenu(){
+  document.getElementById("menu").classList.add("active");
+}
+
+function closeMenu(){
+  document.getElementById("menu").classList.remove("active");
+}
+
+render();
+</script>
 
 </body>
 </html>
