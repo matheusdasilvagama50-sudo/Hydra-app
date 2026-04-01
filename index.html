@@ -6,252 +6,211 @@
 <title>Hydra Bot</title>
 
 <style>
-* {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI';}
-
-body {
-  background: radial-gradient(circle at top, #0f172a, #020617);
-  color: white;
-}
-
-/* FUNDO */
-body::before {
-  content:"";
-  position:fixed;
-  width:100%;
-  height:100%;
-  background-image: radial-gradient(#ffffff22 1px, transparent 1px);
-  background-size:30px 30px;
-  z-index:-1;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI';}
+body{background:#020617;color:white}
 
 /* HEADER */
-header {
-  display:flex;
-  justify-content:space-between;
-  padding:15px 20px;
+header{
+display:flex;
+justify-content:space-between;
+padding:15px 20px;
+background:#020617;
 }
 
-.logo {
-  font-weight:bold;
-  font-size:20px;
-  background: linear-gradient(90deg,#00f0ff,#7c3aed);
-  -webkit-background-clip:text;
-  color:transparent;
+.logo{
+font-weight:bold;
+font-size:20px;
+background:linear-gradient(90deg,#00f0ff,#7c3aed);
+-webkit-background-clip:text;
+color:transparent;
 }
 
-.menu-btn {font-size:24px;cursor:pointer;}
-
-.menu {
-  position:fixed;
-  top:0;
-  left:-100%;
-  width:75%;
-  height:100%;
-  background:#020617;
-  padding:20px;
-  transition:.3s;
+nav a{
+margin-left:15px;
+text-decoration:none;
+color:white;
 }
 
-.menu.active {left:0;}
+/* BANNER ANIMADO */
+.banner{
+text-align:center;
+padding:60px 20px;
+font-size:28px;
+font-weight:bold;
+background:linear-gradient(90deg,#00f0ff,#7c3aed);
+-webkit-background-clip:text;
+color:transparent;
+animation: mover 3s infinite alternate;
+}
 
-.menu a {
-  display:block;
-  padding:15px;
-  margin-top:10px;
-  border-radius:10px;
-  text-decoration:none;
-  color:white;
+@keyframes mover{
+0%{letter-spacing:1px}
+100%{letter-spacing:6px}
 }
 
 /* HERO */
-.hero {
-  text-align:center;
-  padding:60px 20px;
+.hero{
+text-align:center;
+padding:20px;
 }
 
-.hero h1 {font-size:32px;}
-
-.hero span {
-  background: linear-gradient(90deg,#00f0ff,#7c3aed);
-  -webkit-background-clip:text;
-  color:transparent;
+.btn{
+display:inline-block;
+margin-top:20px;
+padding:15px 25px;
+border-radius:10px;
+background:linear-gradient(90deg,#00f0ff,#7c3aed);
+text-decoration:none;
+color:white;
 }
 
-.hero p {color:#aaa;margin-top:10px;}
+/* SEÇÕES */
+.section{padding:30px 20px;display:none;}
+.active{display:block;}
 
-.btn {
-  display:block;
-  margin:15px auto;
-  padding:15px;
-  border-radius:12px;
-  text-decoration:none;
-  text-align:center;
-  width:90%;
-  max-width:300px;
-  transition:.3s;
-}
-
-.btn-primary {
-  background: linear-gradient(90deg,#00f0ff,#7c3aed);
-}
-
-.btn-primary:hover {
-  transform:scale(1.05);
-  box-shadow:0 0 20px #7c3aed88;
-}
-
-.btn-outline {
-  border:1px solid #334155;
-}
-
-/* STATS */
-.stats {
-  display:flex;
-  justify-content:space-around;
-  margin-top:25px;
-}
-
-/* CARDS */
-.section {padding:30px 20px;}
-
-.card {
-  background:#0f172a;
-  padding:20px;
-  border-radius:15px;
-  margin-top:15px;
-  transition:.3s;
-}
-
-.card:hover {
-  transform:translateY(-5px);
-  box-shadow:0 0 15px #00f0ff33;
+.card{
+background:#0f172a;
+padding:15px;
+border-radius:10px;
+margin-top:10px;
 }
 
 /* COMANDOS */
-input {
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  border:none;
-  margin-top:15px;
-  background:#020617;
-  color:white;
+.categoria{
+margin-top:20px;
+color:#00f0ff;
+font-weight:bold;
 }
 
-.categoria {
-  margin-top:25px;
-  color:#00f0ff;
-  font-weight:bold;
+.cmd{
+background:#0f172a;
+padding:10px;
+border-radius:8px;
+margin-top:5px;
 }
 
-.cmd {
-  background:#0f172a;
-  padding:15px;
-  border-radius:12px;
-  margin-top:10px;
-}
-
-footer {
-  text-align:center;
-  padding:30px;
-  color:#777;
-}
+/* FOOTER */
+footer{text-align:center;padding:20px;color:#777}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">Hydra</div>
-  <div class="menu-btn" onclick="openMenu()">☰</div>
+<div class="logo">Hydra</div>
+<nav>
+<a href="#" onclick="show('home')">Início</a>
+<a href="#" onclick="show('apresentacao')">Apresentação</a>
+<a href="#" onclick="show('cmds')">Comandos</a>
+</nav>
 </header>
 
-<div id="menu" class="menu">
-  <div onclick="closeMenu()">✖</div>
-  <a href="#">Início</a>
-  <a href="#cmds">Comandos</a>
+<!-- BANNER -->
+<div class="banner">
+Hydra Tecnologias Avançadas
 </div>
 
-<section class="hero">
-  <h1>Domine o <span>Hydra Bot</span></h1>
-  <p>Automação, economia e poder total no seu servidor.</p>
+<!-- HOME -->
+<section id="home" class="section active">
+<div class="hero">
+<h1>Domine o Hydra Bot</h1>
+<p>Automação, economia e poder total no seu servidor</p>
 
-  <!-- BOTÃO PRINCIPAL -->
-  <a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&scope=bot%20applications.commands" 
-     target="_blank" 
-     class="btn btn-primary">
-     🤖 Adicionar Hydra ao Discord
-  </a>
-
-  <a href="#cmds" class="btn btn-outline">Ver Comandos</a>
-
-  <div class="stats">
-    <div><b>25K+</b><br>Servidores</div>
-    <div><b>1M+</b><br>Usuários</div>
-    <div><b>40+</b><br>Comandos</div>
-  </div>
+<a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&scope=bot%20applications.commands" target="_blank" class="btn">
+Adicionar ao Discord
+</a>
+</div>
 </section>
 
-<section class="section">
-  <div class="card">🤖 IA avançada integrada</div>
-  <div class="card">💰 Sistema de economia completo</div>
-  <div class="card">🎮 Jogos e diversão</div>
-  <div class="card">🛠 Administração poderosa</div>
+<!-- APRESENTAÇÃO -->
+<section id="apresentacao" class="section">
+<div class="card">
+<h2>Sobre o Hydra</h2>
 
-  <!-- SEGUNDO BOTÃO -->
-  <a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&scope=bot%20applications.commands" 
-     target="_blank" 
-     class="btn btn-primary">
-     🚀 Adicionar Agora
-  </a>
+<p>
+O Hydra foi criado com o objetivo de revolucionar a forma como servidores do Discord são administrados.
+Desde o início, o foco sempre foi trazer tecnologia avançada, automação inteligente e ferramentas poderosas
+para facilitar a vida de administradores e proporcionar uma experiência única aos usuários.
+
+Diferente de bots comuns, o Hydra combina desempenho, estabilidade e inovação.
+Cada sistema foi pensado para ser rápido, eficiente e fácil de usar, garantindo que qualquer comunidade,
+independente do tamanho, possa evoluir com segurança e organização.
+
+Hoje, o Hydra já está presente em diversos servidores, mostrando seu potencial e crescimento constante.
+Atualmente contamos com:
+
+✔ 6 Servidores  
+✔ 6 Usuários ativos  
+✔ Mais de 40 Comandos  
+
+E isso é apenas o começo.
+
+Nosso objetivo é transformar o Hydra em uma das maiores plataformas de automação do Discord,
+trazendo atualizações constantes, novos sistemas e melhorias contínuas.
+
+Se você busca controle, desempenho e inovação, o Hydra é a escolha certa.
+</p>
+
+</div>
 </section>
 
+<!-- COMANDOS -->
 <section id="cmds" class="section">
-  <h2>Comandos</h2>
-  <input id="search" placeholder="Pesquisar..." onkeyup="searchCmd()">
-  <div id="list"></div>
+
+<div class="categoria">Administração</div>
+<div class="cmd">/autorole</div>
+<div class="cmd">/clear</div>
+<div class="cmd">/ban</div>
+<div class="cmd">/kick</div>
+<div class="cmd">/lock</div>
+<div class="cmd">/unlock</div>
+
+<div class="categoria">Economia</div>
+<div class="cmd">/cassino</div>
+<div class="cmd">/coinflip</div>
+<div class="cmd">/reabastecer</div>
+
+<div class="categoria">Utilidades</div>
+<div class="cmd">/ping</div>
+<div class="cmd">/hora</div>
+<div class="cmd">/calculadora</div>
+<div class="cmd">/traduzir</div>
+<div class="cmd">/uptime</div>
+
+<div class="categoria">Informações</div>
+<div class="cmd">/serverinfo</div>
+<div class="cmd">/user_info</div>
+<div class="cmd">/cargo_info</div>
+<div class="cmd">/hydra_info</div>
+
+<div class="categoria">Interação</div>
+<div class="cmd">/abraçar</div>
+<div class="cmd">/beijar</div>
+<div class="cmd">/ship</div>
+
+<div class="categoria">Sistema</div>
+<div class="cmd">/afk</div>
+<div class="cmd">/lembrete</div>
+<div class="cmd">/dm</div>
+<div class="cmd">/say</div>
+
+<div class="categoria">Extras</div>
+<div class="cmd">/embed</div>
+<div class="cmd">/copy_emoji</div>
+<div class="cmd">/cores</div>
+<div class="cmd">/avatar</div>
+<div class="cmd">/entregar_cargo</div>
+<div class="cmd">/enquete</div>
+
 </section>
 
 <footer>© Hydra Bot</footer>
 
 <script>
-const cmds = {
-  Administração: [
-    {nome:"/embed criar",desc:"Cria embeds"},
-    {nome:"/container criar",desc:"Cria containers"}
-  ],
-  Utilidades: [
-    {nome:"/ping",desc:"Mostra o ping"}
-  ]
-};
-
-function render() {
-  let html = "";
-  for (let cat in cmds) {
-    html += `<div class="categoria">${cat}</div>`;
-    cmds[cat].forEach(c=>{
-      html += `<div class="cmd"><b>${c.nome}</b><br>${c.desc}</div>`;
-    });
-  }
-  document.getElementById("list").innerHTML = html;
+function show(sec){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById(sec).classList.add('active');
 }
-
-function searchCmd(){
-  let val = document.getElementById("search").value.toLowerCase();
-  document.querySelectorAll(".cmd").forEach(c=>{
-    c.style.display = c.innerText.toLowerCase().includes(val) ? "block":"none";
-  });
-}
-
-function openMenu(){
-  document.getElementById("menu").classList.add("active");
-}
-
-function closeMenu(){
-  document.getElementById("menu").classList.remove("active");
-}
-
-render();
 </script>
 
 </body>
