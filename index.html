@@ -1,257 +1,186 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hydra Bot</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI';}
-body{background:#020617;color:white}
-
-/* HEADER */
-header{display:flex;justify-content:space-between;padding:15px;}
-.logo{
-font-size:22px;font-weight:bold;
-background:linear-gradient(90deg,#00f0ff,#7c3aed);
--webkit-background-clip:text;color:transparent;
-}
-nav a{margin-left:15px;cursor:pointer}
-
-/* BANNER */
-.banner{
-text-align:center;padding:40px;font-size:28px;font-weight:bold;
-background:linear-gradient(90deg,#00f0ff,#7c3aed);
--webkit-background-clip:text;color:transparent;
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #050a1f;
+  color: white;
+  text-align: center;
 }
 
-/* HERO */
-.hero{text-align:center;padding:20px;}
-.buttons{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin-top:20px;}
-.btn{
-padding:15px 25px;border-radius:10px;
-background:linear-gradient(90deg,#00f0ff,#7c3aed);
-color:white;text-decoration:none;
+/* MENU */
+.menu-icon {
+  font-size: 30px;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  cursor: pointer;
 }
 
-/* STATS */
-.stats{display:flex;justify-content:center;gap:40px;margin-top:20px;}
+.menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: #0a0f2c;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.menu a {
+  display: block;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+}
+
+/* TITULO */
+h1 {
+  margin-top: 80px;
+  background: linear-gradient(90deg, #00d4ff, #a855f7);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* BOTÕES */
+.btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  margin: 10px;
+  cursor: pointer;
+  background: linear-gradient(90deg, #00d4ff, #a855f7);
+  color: white;
+  font-weight: bold;
+}
+
+/* IMAGEM ANIMADA */
+.hydra-img {
+  width: 200px;
+  margin-top: 20px;
+  animation: flutuar 3s ease-in-out infinite;
+}
+
+@keyframes flutuar {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
 
 /* CARDS */
-.card{
-background:#0f172a;padding:15px;border-radius:10px;margin:10px;
+.card {
+  background: #0a0f2c;
+  margin: 15px;
+  padding: 15px;
+  border-radius: 10px;
 }
 
-/* TEXTO */
-.gradient-text{
-text-align:center;font-size:28px;margin-top:30px;
-background:linear-gradient(90deg,#00f0ff,#7c3aed);
--webkit-background-clip:text;color:transparent;
+/* ESCONDER ABAS */
+.page {
+  display: none;
 }
 
-/* INSTRUÇÕES */
-.instructions{padding:40px;}
-.instructions h2{
-font-size:28px;margin-top:30px;
-background:linear-gradient(90deg,#00f0ff,#7c3aed);
--webkit-background-clip:text;color:transparent;
+.active {
+  display: block;
 }
-.instructions p{
-font-size:17px;line-height:2;margin-top:15px;color:#ccc;
-}
-
-/* SECTIONS */
-.section{display:none;}
-.active{display:block;}
-
-/* COMANDOS */
-.categoria{
-margin-top:30px;
-font-size:20px;
-color:#00f0ff;
-}
-
-.cmd{
-background:#0f172a;
-padding:15px;
-border-radius:10px;
-margin-top:10px;
-}
-
-.cmd-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.cmd-name{
-font-weight:bold;
-font-size:16px;
-}
-
-.cmd-desc{
-margin-top:10px;
-color:#aaa;
-font-size:15px;
-line-height:1.6;
-}
-
-.copy-btn{
-background:#7c3aed;
-border:none;
-padding:6px 12px;
-border-radius:6px;
-color:white;
-cursor:pointer;
-}
-
-footer{text-align:center;padding:20px;color:#777;}
 </style>
 </head>
 
 <body>
 
-<header>
-<div class="logo">Hydra</div>
-<nav>
-<a onclick="show('home')">Início</a>
-<a onclick="show('cmds')">Comandos</a>
-</nav>
-</header>
+<!-- MENU -->
+<div class="menu-icon" onclick="toggleMenu()">☰</div>
 
-<div class="banner">Hydra Tecnologias Avançadas</div>
+<div id="menu" class="menu">
+  <a href="#" onclick="showPage('home')">Início</a>
+  <a href="#" onclick="showPage('comandos')">Comandos</a>
+  <a href="#" onclick="showPage('editar')">Editar</a>
+</div>
+
+<!-- SOM -->
+<audio id="teclado" src="https://www.soundjay.com/mechanical/keyboard-1.mp3"></audio>
 
 <!-- HOME -->
-<section id="home" class="section active">
+<div id="home" class="page active">
+  <h1>Hydra Tecnologias Avançadas</h1>
 
-<div class="hero">
-<h1>Domine o Hydra Bot</h1>
-<p>Automação, economia e poder total</p>
+  <h2 id="typing"></h2>
 
-<div class="buttons">
-<a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&scope=bot%20applications.commands" class="btn">Adicionar Bot</a>
-<a href="https://discord.gg/Fr4usMy4E" class="btn">Servidor Suporte</a>
+  <!-- IMAGEM -->
+  <img src="https://i.imgur.com/9yG3Z8F.png" class="hydra-img">
+
+  <br>
+
+  <!-- BOTÕES -->
+  <a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&integration_type=0&scope=bot+applications.commands" target="_blank">
+    <button class="btn">Adicionar Bot</button>
+  </a>
+
+  <button class="btn">Servidor Suporte</button>
+
+  <div class="card">🤖 Sistema avançado de automação</div>
+  <div class="card">💰 Economia integrada</div>
+  <div class="card">🛠️ Ferramentas administrativas</div>
 </div>
-
-<div class="stats">
-<div><b>6</b><br>Servidores</div>
-<div><b>6</b><br>Usuários</div>
-<div><b>32</b><br>Comandos</div>
-</div>
-</div>
-
-<div class="card">🤖 Sistema avançado de automação com controle total do servidor.</div>
-<div class="card">💰 Economia integrada com sistemas de aposta e interação.</div>
-<div class="card">🛠 Ferramentas administrativas completas e profissionais.</div>
-
-<div class="gradient-text">O FUTURO DA AUTOMAÇÃO COMEÇA COM O HYDRA 🚀</div>
-
-<div class="instructions">
-
-<h2>📌 Como adicionar o Hydra ao seu servidor</h2>
-<p>
-Para adicionar o Hydra ao seu servidor, clique no botão "Adicionar Bot" localizado acima. 
-Você será redirecionado diretamente para o site oficial do Discord, onde poderá escolher o servidor desejado.
-Após selecionar o servidor, revise todas as permissões solicitadas pelo bot e confirme a autorização.
-Esse processo é essencial para garantir que o Hydra funcione corretamente em todas as suas funcionalidades.
-</p>
-
-<h2>🔐 Permissões necessárias</h2>
-<p>
-O Hydra foi desenvolvido para ser um sistema completo de automação e administração.
-Por isso, ele precisa de permissões administrativas, incluindo gerenciar mensagens, cargos, canais e membros.
-Caso essas permissões não sejam concedidas corretamente, várias funções do bot podem falhar ou não funcionar.
-Sempre verifique se todas as permissões estão ativadas durante a adição do bot.
-</p>
-
-<h2>⚙️ Configuração de hierarquia</h2>
-<p>
-Depois de adicionar o bot, vá até as configurações do servidor e acesse a aba de cargos.
-Arraste o cargo do Hydra para o topo da lista de cargos.
-Isso garante que o bot tenha prioridade sobre outros cargos e consiga executar ações como moderação,
-automação e gerenciamento sem restrições.
-</p>
-
-<h2>🚀 Resultado final</h2>
-<p>
-Após concluir todas essas etapas, o Hydra estará totalmente funcional no seu servidor.
-Você poderá utilizar comandos avançados, automatizar tarefas, gerenciar membros e criar uma experiência completa
-para sua comunidade. O Hydra não é apenas um bot comum — ele é uma central de controle para o seu servidor.
-</p>
-
-</div>
-
-</section>
 
 <!-- COMANDOS -->
-<section id="cmds" class="section">
+<div id="comandos" class="page">
+  <h1>Comandos</h1>
 
-<div class="categoria">Administração</div>
+  <div class="card">/autorole - Define cargos automáticos</div>
+  <div class="card">/clear - Limpa mensagens</div>
+  <div class="card">/ban - Banir usuário</div>
+  <div class="card">/kick - Expulsar usuário</div>
+  <div class="card">/lock - Bloquear chat</div>
+  <div class="card">/unlock - Desbloquear chat</div>
+</div>
 
-<div class="cmd"><div class="cmd-header"><span>/autorole</span><button class="copy-btn" onclick="copy('/autorole')">Copiar</button></div><div class="cmd-desc">Define cargos automáticos para novos membros.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/clear</span><button class="copy-btn" onclick="copy('/clear')">Copiar</button></div><div class="cmd-desc">Remove mensagens em massa rapidamente.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/ban</span><button class="copy-btn" onclick="copy('/ban')">Copiar</button></div><div class="cmd-desc">Bane usuários do servidor com motivo.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/kick</span><button class="copy-btn" onclick="copy('/kick')">Copiar</button></div><div class="cmd-desc">Expulsa usuários do servidor.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/lock</span><button class="copy-btn" onclick="copy('/lock')">Copiar</button></div><div class="cmd-desc">Bloqueia envio de mensagens no canal.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/unlock</span><button class="copy-btn" onclick="copy('/unlock')">Copiar</button></div><div class="cmd-desc">Libera envio de mensagens novamente.</div></div>
+<!-- EDITAR -->
+<div id="editar" class="page">
+  <h1>Editar Comandos</h1>
 
-<div class="categoria">Economia</div>
-
-<div class="cmd"><div class="cmd-header"><span>/cassino</span><button class="copy-btn" onclick="copy('/cassino')">Copiar</button></div><div class="cmd-desc">Sistema de apostas com moedas.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/coinflip</span><button class="copy-btn" onclick="copy('/coinflip')">Copiar</button></div><div class="cmd-desc">Cara ou coroa para ganhar recompensas.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/reabastecer</span><button class="copy-btn" onclick="copy('/reabastecer')">Copiar</button></div><div class="cmd-desc">Recupera recursos do sistema.</div></div>
-
-<div class="categoria">Utilidades</div>
-
-<div class="cmd"><div class="cmd-header"><span>/ping</span><button class="copy-btn" onclick="copy('/ping')">Copiar</button></div><div class="cmd-desc">Mostra o ping do bot.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/hora</span><button class="copy-btn" onclick="copy('/hora')">Copiar</button></div><div class="cmd-desc">Mostra o horário atual.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/calculadora</span><button class="copy-btn" onclick="copy('/calculadora')">Copiar</button></div><div class="cmd-desc">Realiza cálculos matemáticos.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/traduzir</span><button class="copy-btn" onclick="copy('/traduzir')">Copiar</button></div><div class="cmd-desc">Traduz textos automaticamente.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/uptime</span><button class="copy-btn" onclick="copy('/uptime')">Copiar</button></div><div class="cmd-desc">Mostra tempo online do bot.</div></div>
-
-<div class="categoria">Informações</div>
-
-<div class="cmd"><div class="cmd-header"><span>/serverinfo</span><button class="copy-btn" onclick="copy('/serverinfo')">Copiar</button></div><div class="cmd-desc">Informações do servidor.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/user_info</span><button class="copy-btn" onclick="copy('/user_info')">Copiar</button></div><div class="cmd-desc">Informações do usuário.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/cargo_info</span><button class="copy-btn" onclick="copy('/cargo_info')">Copiar</button></div><div class="cmd-desc">Informações de cargos.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/hydra_info</span><button class="copy-btn" onclick="copy('/hydra_info')">Copiar</button></div><div class="cmd-desc">Detalhes do bot Hydra.</div></div>
-
-<div class="categoria">Interação</div>
-
-<div class="cmd"><div class="cmd-header"><span>/abraçar</span><button class="copy-btn" onclick="copy('/abraçar')">Copiar</button></div><div class="cmd-desc">Abraça outro usuário.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/beijar</span><button class="copy-btn" onclick="copy('/beijar')">Copiar</button></div><div class="cmd-desc">Beija outro usuário.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/ship</span><button class="copy-btn" onclick="copy('/ship')">Copiar</button></div><div class="cmd-desc">Mostra compatibilidade entre usuários.</div></div>
-
-<div class="categoria">Sistema</div>
-
-<div class="cmd"><div class="cmd-header"><span>/afk</span><button class="copy-btn" onclick="copy('/afk')">Copiar</button></div><div class="cmd-desc">Define status ausente.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/lembrete</span><button class="copy-btn" onclick="copy('/lembrete')">Copiar</button></div><div class="cmd-desc">Cria lembretes personalizados.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/dm</span><button class="copy-btn" onclick="copy('/dm')">Copiar</button></div><div class="cmd-desc">Envia mensagem privada.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/say</span><button class="copy-btn" onclick="copy('/say')">Copiar</button></div><div class="cmd-desc">Faz o bot falar.</div></div>
-
-<div class="categoria">Extras</div>
-
-<div class="cmd"><div class="cmd-header"><span>/embed</span><button class="copy-btn" onclick="copy('/embed')">Copiar</button></div><div class="cmd-desc">Cria mensagens embed.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/copy_emoji</span><button class="copy-btn" onclick="copy('/copy_emoji')">Copiar</button></div><div class="cmd-desc">Copia emojis.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/cores</span><button class="copy-btn" onclick="copy('/cores')">Copiar</button></div><div class="cmd-desc">Define cores.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/avatar</span><button class="copy-btn" onclick="copy('/avatar')">Copiar</button></div><div class="cmd-desc">Mostra avatar.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/entregar_cargo</span><button class="copy-btn" onclick="copy('/entregar_cargo')">Copiar</button></div><div class="cmd-desc">Entrega cargos.</div></div>
-<div class="cmd"><div class="cmd-header"><span>/enquete</span><button class="copy-btn" onclick="copy('/enquete')">Copiar</button></div><div class="cmd-desc">Cria enquetes.</div></div>
-
-</section>
-
-<footer>Hydra.app</footer>
+  <div class="card">
+    <input placeholder="Editar comando /ban" style="padding:10px;width:80%">
+    <br><br>
+    <button class="btn">Salvar</button>
+  </div>
+</div>
 
 <script>
-function show(sec){
-document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-document.getElementById(sec).classList.add('active');
+/* MENU */
+function toggleMenu() {
+  const menu = document.getElementById("menu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
-function copy(text){
-navigator.clipboard.writeText(text);
-alert("Copiado: " + text);
+/* TROCAR ABA */
+function showPage(page) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(page).classList.add("active");
 }
+
+/* TEXTO DIGITANDO */
+const text = "Seja Bem-vindo ao Painel do Hydra";
+let i = 0;
+const audio = document.getElementById("teclado");
+
+function typingEffect() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    audio.currentTime = 0;
+    audio.play();
+    i++;
+    setTimeout(typingEffect, 50);
+  }
+}
+
+typingEffect();
 </script>
 
 </body>
