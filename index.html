@@ -14,7 +14,6 @@ body {
   text-align: center;
 }
 
-/* MENU */
 .menu-icon {
   font-size: 30px;
   position: absolute;
@@ -40,7 +39,6 @@ body {
   text-decoration: none;
 }
 
-/* TITULO */
 h1 {
   margin-top: 80px;
   background: linear-gradient(90deg, #00d4ff, #a855f7);
@@ -48,7 +46,6 @@ h1 {
   color: transparent;
 }
 
-/* BOTÕES */
 .btn {
   padding: 12px 20px;
   border: none;
@@ -60,7 +57,6 @@ h1 {
   font-weight: bold;
 }
 
-/* IMAGEM */
 .hydra-img {
   width: 200px;
   margin-top: 20px;
@@ -73,7 +69,6 @@ h1 {
   100% { transform: translateY(0px); }
 }
 
-/* CARD */
 .card {
   background: #0a0f2c;
   margin: 15px;
@@ -81,7 +76,6 @@ h1 {
   border-radius: 10px;
 }
 
-/* ABAS */
 .page { display: none; }
 .active { display: block; }
 
@@ -97,7 +91,6 @@ input, select {
 
 <body>
 
-<!-- MENU -->
 <div class="menu-icon" onclick="toggleMenu()">☰</div>
 
 <div id="menu" class="menu">
@@ -108,16 +101,12 @@ input, select {
 
 <!-- HOME -->
 <div id="home" class="page active">
-
 <h1>Hydra Tecnologias Avançadas</h1>
-
 <h2>🔥 Domine o poder da automação total</h2>
 
-<!-- IMAGEM -->
 <img src="https://i.postimg.cc/8cZ0pJ9H/hydra.png" class="hydra-img">
 
-<!-- BOTÕES -->
-<a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&integration_type=0&scope=bot+applications.commands" target="_blank">
+<a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&scope=bot%20applications.commands" target="_blank">
 <button class="btn">Adicionar Bot</button>
 </a>
 
@@ -125,76 +114,36 @@ input, select {
 <button class="btn">Servidor Suporte</button>
 </a>
 
-<!-- DESCRIÇÃO -->
 <div class="card">
-🚀 O Hydra é um sistema avançado de automação para Discord, projetado para oferecer controle total do seu servidor, com comandos inteligentes, economia integrada e ferramentas administrativas profissionais.
-</div>
-
-<!-- MOTIVAÇÃO -->
-<div class="card">
-💡 "Grandes servidores não são feitos por sorte, mas por organização, controle e tecnologia."
-</div>
-
-<!-- INSTRUÇÕES -->
-<div class="card">
-<h3>📌 Como adicionar o bot</h3>
-Clique em "Adicionar Bot", escolha seu servidor e autorize todas as permissões solicitadas.
+🚀 O Hydra é um sistema avançado de automação para Discord.
 </div>
 
 <div class="card">
-<h3>🔐 Configurar permissões</h3>
-Certifique-se que o bot possui permissões administrativas para funcionar corretamente.
+💡 "Controle total do seu servidor começa aqui."
 </div>
-
-<div class="card">
-<h3>⚙️ Hierarquia de cargos</h3>
-Vá nas configurações do servidor e arraste o cargo do Hydra para o topo da lista.
-</div>
-
-<div class="card">
-<h3>✅ Resultado final</h3>
-Após configurar tudo, o Hydra estará pronto para automatizar e gerenciar seu servidor completamente.
-</div>
-
 </div>
 
 <!-- COMANDOS -->
 <div id="comandos" class="page">
 <h1>Comandos</h1>
-
 <div class="card">/autorole</div>
-<div class="card">/clear</div>
 <div class="card">/ban</div>
 <div class="card">/kick</div>
-<div class="card">/lock</div>
-<div class="card">/unlock</div>
-
 </div>
 
 <!-- EDITAR -->
 <div id="editar" class="page">
-<h1>Editar Comandos</h1>
+<h1>Editar Config</h1>
 
-<!-- ESCOLHER COMANDO -->
-<select id="cmd">
-<option>/autorole</option>
-<option>/ban</option>
-<option>/kick</option>
-</select>
+<input id="guild" placeholder="ID do servidor">
+<input id="emoji" placeholder="Emoji (🔥)">
+<input id="cor" type="color">
+<input id="footer" placeholder="Footer">
 
-<!-- ESCOLHER EMOJI -->
-<input placeholder="Emoji (ex: 🔥)" id="emoji">
-
-<!-- COR -->
-<input type="color" id="cor">
-
-<!-- FOOTER -->
-<input placeholder="Footer do embed" id="footer">
-
+<br>
 <button class="btn" onclick="salvar()">Salvar</button>
 
 <div id="preview" class="card">Preview do Embed</div>
-
 </div>
 
 <script>
@@ -208,19 +157,39 @@ function showPage(page) {
   document.getElementById(page).classList.add("active");
 }
 
-/* EDITAR (SIMULAÇÃO) */
-function salvar() {
+async function salvar() {
+  const guild = document.getElementById("guild").value;
   const emoji = document.getElementById("emoji").value;
   const cor = document.getElementById("cor").value;
   const footer = document.getElementById("footer").value;
+
+  if (!guild) {
+    alert("Coloque o ID do servidor!");
+    return;
+  }
+
+  await fetch("https://hydra-api-1.onrender.com/salvar", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      guild_id: guild,
+      emoji: emoji,
+      cor: cor,
+      footer: footer
+    })
+  });
 
   const preview = document.getElementById("preview");
 
   preview.style.borderLeft = "5px solid " + cor;
   preview.innerHTML = `
-    ${emoji} Comando atualizado<br><br>
+    ${emoji} Configuração salva<br><br>
     Footer: ${footer}
   `;
+
+  alert("✅ Configuração salva com sucesso!");
 }
 </script>
 
