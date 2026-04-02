@@ -3,193 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hydra Bot</title>
+<title>Hydra Dashboard</title>
 
 <style>
 body {
   margin: 0;
   font-family: Arial;
-  background: #050a1f;
+  background: #0b0f2a;
   color: white;
+  display: flex;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  background: #0a0f2c;
+  height: 100vh;
+  padding: 20px;
+}
+
+.sidebar h2 {
   text-align: center;
 }
 
-.menu-icon {
-  font-size: 30px;
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  cursor: pointer;
-}
-
-.menu {
-  display: none;
-  position: absolute;
-  top: 60px;
-  right: 20px;
-  background: #0a0f2c;
-  border-radius: 10px;
-  padding: 10px;
-}
-
-.menu a {
+.sidebar a {
   display: block;
-  color: white;
   padding: 10px;
-  text-decoration: none;
-}
-
-h1 {
-  margin-top: 80px;
-  background: linear-gradient(90deg, #00d4ff, #a855f7);
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.btn {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 10px;
-  margin: 10px;
+  margin: 5px 0;
   cursor: pointer;
-  background: linear-gradient(90deg, #00d4ff, #a855f7);
-  color: white;
-  font-weight: bold;
+  border-radius: 8px;
 }
 
-.hydra-img {
-  width: 200px;
-  margin-top: 20px;
-  animation: flutuar 3s ease-in-out infinite;
+.sidebar a:hover {
+  background: #1a1f4a;
 }
 
-@keyframes flutuar {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0px); }
+/* CONTEÚDO */
+.content {
+  flex: 1;
+  padding: 20px;
 }
 
+/* CARD */
 .card {
-  background: #0a0f2c;
-  margin: 15px;
-  padding: 15px;
+  background: #11163a;
+  padding: 20px;
   border-radius: 10px;
+  margin: 10px 0;
 }
 
-.page { display: none; }
-.active { display: block; }
-
+/* INPUT */
 input, select {
+  width: 100%;
   padding: 10px;
-  margin: 5px;
+  margin: 8px 0;
   border-radius: 8px;
   border: none;
-  width: 80%;
+}
+
+/* BOTÃO */
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg,#00d4ff,#a855f7);
+  color: white;
+  cursor: pointer;
+}
+
+/* PREVIEW */
+.preview {
+  border-left: 5px solid #5865F2;
+}
+
+/* LOADING */
+.loading {
+  display: none;
+  margin-top: 10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="menu-icon" onclick="toggleMenu()">☰</div>
-
-<div id="menu" class="menu">
-  <a onclick="showPage('home')">Início</a>
-  <a onclick="showPage('comandos')">Comandos</a>
-  <a onclick="showPage('editar')">Editar</a>
+<div class="sidebar">
+  <h2>Hydra</h2>
+  <a onclick="show('home')">🏠 Início</a>
+  <a onclick="show('editar')">⚙️ Editar</a>
+  <a onclick="show('comandos')">📜 Comandos</a>
 </div>
+
+<div class="content">
 
 <!-- HOME -->
-<div id="home" class="page active">
-<h1>Hydra Tecnologias Avançadas</h1>
-<h2>🔥 Domine o poder da automação total</h2>
+<div id="home" class="page">
+  <h1>Bem-vindo ao Hydra</h1>
 
-<img src="https://i.postimg.cc/8cZ0pJ9H/hydra.png" class="hydra-img">
+  <div class="card">
+    💡 "Controle total do seu servidor começa aqui."
+  </div>
 
-<a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&scope=bot%20applications.commands" target="_blank">
-<button class="btn">Adicionar Bot</button>
-</a>
-
-<a href="https://discord.gg/CTUE9asuT" target="_blank">
-<button class="btn">Servidor Suporte</button>
-</a>
-
-<div class="card">
-🚀 O Hydra é um sistema avançado de automação para Discord.
-</div>
-
-<div class="card">
-💡 "Controle total do seu servidor começa aqui."
-</div>
-</div>
-
-<!-- COMANDOS -->
-<div id="comandos" class="page">
-<h1>Comandos</h1>
-<div class="card">/autorole</div>
-<div class="card">/ban</div>
-<div class="card">/kick</div>
+  <div class="card">
+    <a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&scope=bot%20applications.commands" target="_blank">
+      <button>Adicionar Bot</button>
+    </a>
+  </div>
 </div>
 
 <!-- EDITAR -->
-<div id="editar" class="page">
-<h1>Editar Config</h1>
+<div id="editar" class="page" style="display:none;">
+  <h1>Editar Configuração</h1>
 
-<input id="guild" placeholder="ID do servidor">
-<input id="emoji" placeholder="Emoji (🔥)">
-<input id="cor" type="color">
-<input id="footer" placeholder="Footer">
+  <div class="card">
+    <input id="guild" placeholder="ID do servidor">
+    <input id="emoji" placeholder="Emoji (🔥)">
+    <input id="cor" type="color">
+    <input id="footer" placeholder="Footer">
 
-<br>
-<button class="btn" onclick="salvar()">Salvar</button>
+    <button onclick="salvar()">Salvar</button>
 
-<div id="preview" class="card">Preview do Embed</div>
+    <div class="loading" id="loading">⏳ Salvando...</div>
+  </div>
+
+  <div class="card preview" id="preview">
+    Preview do Embed
+  </div>
+</div>
+
+<!-- COMANDOS -->
+<div id="comandos" class="page" style="display:none;">
+  <h1>Comandos</h1>
+
+  <div class="card">/ban</div>
+  <div class="card">/kick</div>
+  <div class="card">/clear</div>
+</div>
+
 </div>
 
 <script>
-function toggleMenu() {
-  const menu = document.getElementById("menu");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
+function show(page){
+  document.querySelectorAll(".page").forEach(p => p.style.display="none");
+  document.getElementById(page).style.display="block";
 }
 
-function showPage(page) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  document.getElementById(page).classList.add("active");
-}
-
-async function salvar() {
+async function salvar(){
   const guild = document.getElementById("guild").value;
   const emoji = document.getElementById("emoji").value;
   const cor = document.getElementById("cor").value;
   const footer = document.getElementById("footer").value;
 
-  if (!guild) {
+  const loading = document.getElementById("loading");
+
+  if(!guild){
     alert("Coloque o ID do servidor!");
     return;
   }
 
-  await fetch("https://hydra-api-1.onrender.com/salvar", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      guild_id: guild,
-      emoji: emoji,
-      cor: cor,
-      footer: footer
-    })
-  });
+  loading.style.display = "block";
 
-  const preview = document.getElementById("preview");
+  try {
+    const res = await fetch("https://hydra-api-1.onrender.com/salvar", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({
+        guild_id: guild,
+        emoji: emoji,
+        cor: cor,
+        footer: footer
+      })
+    });
 
-  preview.style.borderLeft = "5px solid " + cor;
-  preview.innerHTML = `
-    ${emoji} Configuração salva<br><br>
-    Footer: ${footer}
-  `;
+    const data = await res.json();
 
-  alert("✅ Configuração salva com sucesso!");
+    // PREVIEW
+    const preview = document.getElementById("preview");
+    preview.style.borderLeft = "5px solid " + cor;
+    preview.innerHTML = `
+      <b>${emoji} Painel atualizado</b><br><br>
+      Footer: ${footer}
+    `;
+
+    alert("✅ Salvo com sucesso!");
+
+  } catch(err){
+    alert("Erro ao conectar API");
+  }
+
+  loading.style.display = "none";
 }
 </script>
 
