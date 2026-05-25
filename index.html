@@ -1,199 +1,216 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hydra Dashboard</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #0b0f2a;
-  color: white;
-  display: flex;
-}
-
-/* SIDEBAR */
-.sidebar {
-  width: 220px;
-  background: #0a0f2c;
-  height: 100vh;
-  padding: 20px;
-}
-
-.sidebar h2 {
-  text-align: center;
-}
-
-.sidebar a {
-  display: block;
-  padding: 10px;
-  margin: 5px 0;
-  cursor: pointer;
-  border-radius: 8px;
-}
-
-.sidebar a:hover {
-  background: #1a1f4a;
-}
-
-/* CONTEÚDO */
-.content {
-  flex: 1;
-  padding: 20px;
-}
-
-/* CARD */
-.card {
-  background: #11163a;
-  padding: 20px;
-  border-radius: 10px;
-  margin: 10px 0;
-}
-
-/* INPUT */
-input, select {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 8px;
-  border: none;
-}
-
-/* BOTÃO */
-button {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(90deg,#00d4ff,#a855f7);
-  color: white;
-  cursor: pointer;
-}
-
-/* PREVIEW */
-.preview {
-  border-left: 5px solid #5865F2;
-}
-
-/* LOADING */
-.loading {
-  display: none;
-  margin-top: 10px;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chatbot AI</title>
+  <style>
+    :root{
+      --bg:#0b1020; --panel:#11182c; --line:#24314f; --text:#ecf2ff; --muted:#93a3c7;
+      --brand:#7c5cff; --brand2:#20d3ff; --user:#5c7cff; --ai:#141c33;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif; background:linear-gradient(180deg,#09101f,#050814);
+      color:var(--text);
+    }
+    .app{min-height:100vh; display:grid; grid-template-columns:320px 1fr}
+    .side{
+      padding:20px; border-right:1px solid var(--line); background:rgba(10,15,30,.95);
+    }
+    .brand{
+      padding:16px; border:1px solid var(--line); border-radius:18px;
+      background:linear-gradient(180deg, rgba(124,92,255,.16), rgba(32,211,255,.08));
+      margin-bottom:16px;
+    }
+    .brand h1{margin:0 0 6px;font-size:18px}
+    .brand p{margin:0;color:var(--muted);font-size:13px}
+    label{display:block;font-size:12px;color:#b8c4ea;margin:12px 0 6px}
+    input,textarea,button{
+      width:100%; border-radius:12px; border:1px solid var(--line); background:#0b1327; color:var(--text);
+      padding:12px; font:inherit;
+    }
+    textarea{min-height:96px; resize:vertical}
+    button{
+      background:linear-gradient(135deg,var(--brand),#5aa7ff); border:none; font-weight:700; cursor:pointer;
+      margin-top:10px;
+    }
+    button.secondary{background:#18233e; border:1px solid #2c3960}
+    .tiny{font-size:12px;color:var(--muted);line-height:1.45}
+    .main{display:flex; flex-direction:column; min-width:0}
+    .top{
+      padding:16px 20px; border-bottom:1px solid var(--line); background:rgba(9,13,26,.7);
+      display:flex; justify-content:space-between; gap:12px; align-items:center;
+    }
+    .pill{font-size:12px; padding:7px 10px; border:1px solid #2b3960; border-radius:999px; color:#c5d3ff}
+    .chat{
+      flex:1; display:flex; flex-direction:column; min-height:0;
+    }
+    .msgs{
+      flex:1; overflow:auto; padding:18px; display:flex; flex-direction:column; gap:12px;
+    }
+    .msg{
+      max-width:82%; padding:12px 14px; border-radius:16px; border:1px solid #263355; white-space:pre-wrap; line-height:1.45;
+    }
+    .msg.user{align-self:flex-end; background:rgba(124,92,255,.22)}
+    .msg.ai{align-self:flex-start; background:rgba(20,28,51,.95)}
+    .meta{font-size:11px;color:var(--muted);margin-top:6px}
+    .composer{
+      border-top:1px solid var(--line); padding:14px; background:rgba(10,15,30,.95);
+    }
+    .row{display:flex; gap:10px; align-items:flex-end}
+    .row > *{flex:1}
+  </style>
 </head>
-
 <body>
+  <div class="app">
+    <aside class="side">
+      <div class="brand">
+        <h1>Chatbot AI</h1>
+        <p>Gemini 3.5 Flash + interface simples</p>
+      </div>
 
-<div class="sidebar">
-  <h2>Hydra</h2>
-  <a onclick="show('home')">🏠 Início</a>
-  <a onclick="show('editar')">⚙️ Editar</a>
-  <a onclick="show('comandos')">📜 Comandos</a>
-</div>
+      <label>API Key do Gemini</label>
+      <input id="apiKey" type="password" placeholder="Cole sua chave aqui" />
 
-<div class="content">
+      <label>Nome do bot</label>
+      <input id="botName" value="Assistente" />
 
-<!-- HOME -->
-<div id="home" class="page">
-  <h1>Bem-vindo ao Hydra</h1>
+      <label>Prompt do sistema</label>
+      <textarea id="systemPrompt">Você é um assistente direto, inteligente e útil. Responda de forma curta, clara e sem enrolação.</textarea>
 
-  <div class="card">
-    💡 "Controle total do seu servidor começa aqui."
+      <label>Modelo</label>
+      <input id="model" value="gemini-3.5-flash" />
+
+      <button id="saveBtn">Salvar no navegador</button>
+      <button id="clearBtn" class="secondary">Limpar conversa</button>
+
+      <p class="tiny" style="margin-top:12px">
+        Use isso para teste. Para produção, o ideal é colocar a chave no backend.
+      </p>
+    </aside>
+
+    <main class="main">
+      <div class="top">
+        <div>
+          <strong id="title">Assistente</strong><br />
+          <span class="tiny">Chat em tempo real</span>
+        </div>
+        <div class="pill">Gemini API</div>
+      </div>
+
+      <section class="chat">
+        <div id="msgs" class="msgs"></div>
+
+        <div class="composer">
+          <div class="row">
+            <textarea id="input" placeholder="Digite sua mensagem..."></textarea>
+            <button id="sendBtn">Enviar</button>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
 
-  <div class="card">
-    <a href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&scope=bot%20applications.commands" target="_blank">
-      <button>Adicionar Bot</button>
-    </a>
-  </div>
-</div>
+  <script>
+    const apiKeyEl = document.getElementById('apiKey');
+    const botNameEl = document.getElementById('botName');
+    const systemPromptEl = document.getElementById('systemPrompt');
+    const modelEl = document.getElementById('model');
+    const msgsEl = document.getElementById('msgs');
+    const inputEl = document.getElementById('input');
+    const titleEl = document.getElementById('title');
 
-<!-- EDITAR -->
-<div id="editar" class="page" style="display:none;">
-  <h1>Editar Configuração</h1>
+    let history = [];
 
-  <div class="card">
-    <input id="guild" placeholder="ID do servidor">
-    <input id="emoji" placeholder="Emoji (🔥)">
-    <input id="cor" type="color">
-    <input id="footer" placeholder="Footer">
+    function addMsg(role, text){
+      const div = document.createElement('div');
+      div.className = 'msg ' + (role === 'user' ? 'user' : 'ai');
+      div.textContent = text;
+      msgsEl.appendChild(div);
+      msgsEl.scrollTop = msgsEl.scrollHeight;
+      return div;
+    }
 
-    <button onclick="salvar()">Salvar</button>
+    function loadSaved(){
+      apiKeyEl.value = localStorage.getItem('gemini_api_key') || '';
+      botNameEl.value = localStorage.getItem('bot_name') || 'Assistente';
+      systemPromptEl.value = localStorage.getItem('system_prompt') || systemPromptEl.value;
+      modelEl.value = localStorage.getItem('gemini_model') || 'gemini-3.5-flash';
+      titleEl.textContent = botNameEl.value;
+    }
 
-    <div class="loading" id="loading">⏳ Salvando...</div>
-  </div>
+    function saveAll(){
+      localStorage.setItem('gemini_api_key', apiKeyEl.value.trim());
+      localStorage.setItem('bot_name', botNameEl.value.trim() || 'Assistente');
+      localStorage.setItem('system_prompt', systemPromptEl.value);
+      localStorage.setItem('gemini_model', modelEl.value.trim() || 'gemini-3.5-flash');
+      titleEl.textContent = botNameEl.value.trim() || 'Assistente';
+    }
 
-  <div class="card preview" id="preview">
-    Preview do Embed
-  </div>
-</div>
+    async function sendMessage(){
+      const apiKey = apiKeyEl.value.trim();
+      const model = modelEl.value.trim() || 'gemini-3.5-flash';
+      const userText = inputEl.value.trim();
+      const systemPrompt = systemPromptEl.value.trim();
 
-<!-- COMANDOS -->
-<div id="comandos" class="page" style="display:none;">
-  <h1>Comandos</h1>
+      if(!apiKey){ addMsg('ai','Coloque sua API key primeiro.'); return; }
+      if(!userText) return;
 
-  <div class="card">/ban</div>
-  <div class="card">/kick</div>
-  <div class="card">/clear</div>
-</div>
+      saveAll();
+      addMsg('user', userText);
+      inputEl.value = '';
 
-</div>
+      const typing = addMsg('ai', 'Digitando...');
+      try{
+        history.push({ role: 'user', parts: [{ text: userText }] });
 
-<script>
-function show(page){
-  document.querySelectorAll(".page").forEach(p => p.style.display="none");
-  document.getElementById(page).style.display="block";
-}
+        const body = {
+          systemInstruction: { parts: [{ text: systemPrompt }] },
+          contents: history,
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 1024
+          }
+        };
 
-async function salvar(){
-  const guild = document.getElementById("guild").value;
-  const emoji = document.getElementById("emoji").value;
-  const cor = document.getElementById("cor").value;
-  const footer = document.getElementById("footer").value;
+        const res = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+          }
+        );
 
-  const loading = document.getElementById("loading");
+        const data = await res.json();
+        typing.remove();
 
-  if(!guild){
-    alert("Coloque o ID do servidor!");
-    return;
-  }
+        const reply = data?.candidates?.[0]?.content?.parts?.map(p => p.text).join('') || 'Sem resposta.';
+        addMsg('ai', reply);
+        history.push({ role: 'model', parts: [{ text: reply }] });
+      }catch(err){
+        typing.remove();
+        addMsg('ai', 'Erro ao conectar na API.');
+      }
+    }
 
-  loading.style.display = "block";
-
-  try {
-    const res = await fetch("https://hydra-api-1.onrender.com/salvar", {
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({
-        guild_id: guild,
-        emoji: emoji,
-        cor: cor,
-        footer: footer
-      })
+    document.getElementById('sendBtn').addEventListener('click', sendMessage);
+    document.getElementById('saveBtn').addEventListener('click', saveAll);
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      history = [];
+      msgsEl.innerHTML = '';
+      addMsg('ai', 'Conversa limpa.');
     });
 
-    const data = await res.json();
+    inputEl.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' && !e.shiftKey){
+        e.preventDefault();
+        sendMessage();
+      }
+    });
 
-    // PREVIEW
-    const preview = document.getElementById("preview");
-    preview.style.borderLeft = "5px solid " + cor;
-    preview.innerHTML = `
-      <b>${emoji} Painel atualizado</b><br><br>
-      Footer: ${footer}
-    `;
+    botNameEl.addEventListener('input', () => titleEl.textContent = botNameEl.value.trim() || 'Assistente');
 
-    alert("✅ Salvo com sucesso!");
-
-  } catch(err){
-    alert("Erro ao conectar API");
-  }
-
-  loading.style.display = "none";
-}
-</script>
-
-</body>
-</html>
+    loadSaved();
+    addMsg('ai',
