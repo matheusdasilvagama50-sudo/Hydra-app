@@ -3,357 +3,216 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NovaX AI</title>
-  <style>
-    :root{
-      --bg:#050816;
-      --bg2:#090f22;
-      --card:rgba(15,20,38,.72);
-      --line:rgba(138,158,255,.14);
-      --text:#eef3ff;
-      --muted:#97a4c9;
-      --brand:#7c5cff;
-      --brand2:#20d3ff;
-      --ok:#21d07a;
-      --warn:#ffbf3f;
-      --danger:#ff5b72;
-      --shadow:0 24px 70px rgba(0,0,0,.38);
-      --r:22px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(124,92,255,.20), transparent 28%),
-        radial-gradient(circle at top right, rgba(32,211,255,.14), transparent 24%),
-        linear-gradient(180deg, #050816 0%, #081022 100%);
-      overflow-x:hidden;
-    }
-    a{color:inherit;text-decoration:none}
-    .container{width:min(1200px, calc(100% - 32px)); margin:0 auto}
-    .nav{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(16px);
-      background:rgba(6,10,22,.68);
-      border-bottom:1px solid var(--line);
-    }
-    .nav-inner{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-    }
-    .logo{
-      display:flex; gap:12px; align-items:center;
-      font-weight:900;
-    }
-    .mark{
-      width:42px;height:42px;border-radius:14px;
-      background:linear-gradient(135deg,var(--brand),var(--brand2));
-      box-shadow:0 0 30px rgba(124,92,255,.22);
-      display:grid;place-items:center;
-    }
-    .links{display:flex; gap:18px; color:var(--muted); font-size:14px; flex-wrap:wrap}
-    .links a:hover{color:var(--text)}
-    .btn{
-      border:none; cursor:pointer; font-weight:800;
-      padding:12px 16px; border-radius:14px; color:white;
-      background:linear-gradient(135deg,var(--brand),#5ea2ff);
-      box-shadow:0 12px 30px rgba(92,123,255,.24);
-    }
-    .btn.secondary{
-      background:rgba(18,25,48,.92);
-      border:1px solid var(--line);
-      box-shadow:none;
-    }
-
-    .hero{
-      position:relative;
-      padding:72px 0 28px;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:26px;
-      align-items:center;
-    }
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:8px 12px; border-radius:999px;
-      border:1px solid rgba(138,158,255,.16);
-      background:rgba(15,20,38,.55);
-      color:#dce6ff; font-size:13px;
-    }
-    .dot{width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 16px rgba(33,208,122,.7)}
-    h1{
-      font-size:clamp(42px, 6vw, 76px);
-      line-height:.96;
-      margin:18px 0 14px;
-      letter-spacing:-.04em;
-    }
-    .gradient{
-      background:linear-gradient(135deg,#fff 0%, #cfd7ff 25%, #8edcff 55%, #7c5cff 100%);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-    }
-    .lead{
-      color:var(--muted);
-      font-size:18px;
-      line-height:1.65;
-      max-width:64ch;
-    }
-    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:24px}
-    .hero-card{
-      background:linear-gradient(180deg, rgba(15,20,38,.88), rgba(10,14,26,.92));
-      border:1px solid var(--line);
-      border-radius:28px;
-      padding:18px;
-      box-shadow:var(--shadow);
-      position:relative;
-      overflow:hidden;
-      min-height:430px;
-    }
-    .hero-card::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:radial-gradient(circle at top right, rgba(32,211,255,.12), transparent 38%),
-                 radial-gradient(circle at bottom left, rgba(124,92,255,.14), transparent 35%);
-      pointer-events:none;
-    }
-    .glass{
-      position:relative;
-      border:1px solid rgba(138,158,255,.16);
-      background:rgba(8,12,24,.72);
-      border-radius:22px;
-      padding:16px;
-      box-shadow:0 16px 40px rgba(0,0,0,.22);
-    }
-    .stat-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
-      margin-top:12px;
-    }
-    .stat{
-      padding:14px;
-      border-radius:18px;
-      background:rgba(8,12,24,.8);
-      border:1px solid rgba(138,158,255,.14);
-    }
-    .stat strong{display:block;font-size:28px}
-    .stat small{color:var(--muted)}
-    .preview{
-      margin-top:14px;
-      border-radius:22px;
-      overflow:hidden;
-      height:220px;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.35)),
-        url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80') center/cover;
-      border:1px solid rgba(138,158,255,.14);
-      position:relative;
-    }
-    .badge{
-      position:absolute; left:14px; bottom:14px;
-      padding:8px 11px;
-      border-radius:999px;
-      background:rgba(5,8,18,.74);
-      border:1px solid rgba(255,255,255,.14);
-      font-size:12px;
-    }
-
-    section{padding:26px 0}
-    .section-title{
-      display:flex; justify-content:space-between; align-items:end; gap:10px; flex-wrap:wrap;
-      margin-bottom:14px;
-    }
-    .section-title h2{margin:0;font-size:34px; letter-spacing:-.03em}
-    .section-title p{margin:0;color:var(--muted)}
-    .grid{
-      display:grid; gap:14px;
-    }
-    .features{grid-template-columns:repeat(4,1fr)}
-    .card{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:var(--r);
-      padding:18px;
-      box-shadow:var(--shadow);
-    }
-    .card h3{margin:0 0 8px}
-    .card p{margin:0;color:var(--muted); line-height:1.55}
-    .icon{
-      width:44px;height:44px;border-radius:15px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg, rgba(124,92,255,.22), rgba(32,211,255,.14));
-      margin-bottom:12px;
-      border:1px solid rgba(138,158,255,.14);
-    }
-
-    .services{grid-template-columns:repeat(3,1fr)}
-    .service{
-      min-height:200px;
-      display:flex;flex-direction:column;justify-content:space-between;
-      overflow:hidden; position:relative;
-    }
-    .service::after{
-      content:""; position:absolute; inset:auto -20px -30px auto;
-      width:140px; height:140px; border-radius:50%;
-      background:radial-gradient(circle, rgba(124,92,255,.16), transparent 68%);
-      pointer-events:none;
-    }
-
-    .pricing{grid-template-columns:repeat(3,1fr); align-items:stretch}
-    .price{
-      position:relative;
-      min-height:100%;
-      display:flex; flex-direction:column; gap:14px;
-    }
-    .price.featured{
-      border-color:rgba(124,92,255,.44);
-      transform:translateY(-6px);
-      background:linear-gradient(180deg, rgba(124,92,255,.12), rgba(15,20,38,.84));
-    }
-    .money{font-size:42px; font-weight:900; letter-spacing:-.04em}
-    .money span{font-size:14px; color:var(--muted); font-weight:600}
-    ul{margin:0; padding-left:18px; color:#dbe4ff}
-    li{margin:8px 0; color:var(--muted)}
-    .tag{
-      display:inline-flex; align-items:center;
-      gap:8px; padding:8px 10px;
-      border-radius:999px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(138,158,255,.14);
-      font-size:12px; color:#dfe7ff;
-    }
-
-    .split{
-      display:grid; grid-template-columns:1fr 1fr; gap:14px;
-    }
-    .gallery{
-      display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
-    }
-    .imgbox{
-      border-radius:20px; overflow:hidden; min-height:210px;
-      border:1px solid rgba(138,158,255,.14);
-      background:#0c1224;
-      position:relative;
-    }
-    .imgbox img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.05) contrast(1.04)}
-    .overlay{
-      position:absolute; inset:auto 0 0 0;
-      padding:14px;
-      background:linear-gradient(180deg, transparent, rgba(0,0,0,.82));
-      font-size:13px;
-    }
-
-    .faq{grid-template-columns:1fr 1fr}
-    details{
-      border:1px solid rgba(138,158,255,.14);
-      background:rgba(15,20,38,.74);
-      border-radius:18px;
-      padding:14px 16px;
-    }
-    summary{cursor:pointer; font-weight:700}
-    details p{color:var(--muted); line-height:1.6}
-
-    .footer{
-      padding:28px 0 40px;
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    .modal{
-      position:fixed; inset:0; background:rgba(0,0,0,.58);
-      display:none; place-items:center; padding:18px; z-index:80;
-    }
-    .modal.open{display:grid}
-    .modal-box{
-      width:min(560px,100%);
-      background:linear-gradient(180deg, rgba(15,20,38,.98), rgba(10,14,26,.98));
-      border:1px solid var(--line);
-      border-radius:26px;
-      padding:18px;
-      box-shadow:var(--shadow);
-    }
-    .tabs{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0}
-    .tab{
-      padding:12px; border-radius:14px; cursor:pointer; text-align:center;
-      background:rgba(12,17,32,.92); border:1px solid rgba(138,158,255,.14);
-    }
-    .tab.active{background:linear-gradient(135deg, rgba(124,92,255,.26), rgba(32,211,255,.14)); border-color:rgba(124,92,255,.38)}
-    .hidden{display:none}
-    .field{margin:10px 0}
-    .field input{
-      width:100%; padding:13px 14px; border-radius:14px;
-      border:1px solid rgba(138,158,255,.14); background:rgba(8,12,24,.96); color:var(--text);
-      outline:none;
-    }
-
-    .float{
-      position:absolute;
-      animation: float 6s ease-in-out infinite;
-      opacity:.9;
-      filter:drop-shadow(0 10px 20px rgba(0,0,0,.2));
-    }
-    .f1{top:18px; right:18px}
-    .f2{bottom:18px; left:18px; animation-delay:1.2s}
-    @keyframes float{
-      0%,100%{transform:translateY(0px)}
-      50%{transform:translateY(-12px)}
-    }
-    .reveal{
-      opacity:0; transform:translateY(20px);
-      transition:.7s ease;
-    }
-    .reveal.show{opacity:1; transform:translateY(0)}
-    .pulse{
-      position:relative;
-    }
-    .pulse::after{
-      content:""; position:absolute; inset:-2px;
-      border-radius:inherit;
-      border:1px solid rgba(32,211,255,.26);
-      animation:pulse 2.2s infinite;
-    }
-    @keyframes pulse{
-      0%{transform:scale(1); opacity:.9}
-      100%{transform:scale(1.12); opacity:0}
-    }
-
-    @media (max-width: 980px){
-      .hero-grid,.features,.services,.pricing,.split,.faq{grid-template-columns:1fr}
-      .links{display:none}
-      .section-title h2{font-size:28px}
-    }
-  </style>
+  <title>NovaAI — Site Premium</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="nav">
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+
+  <header class="nav">
     <div class="container nav-inner">
-      <div class="logo">
-        <div class="mark">N</div>
+      <div class="brand">
+        <div class="logo">N</div>
         <div>
-          <div>NovaX AI</div>
-          <small style="color:var(--muted)">Site completo com IA</small>
+          <strong>NovaAI</strong>
+          <span>Plataforma premium com IA</span>
         </div>
       </div>
-      <div class="links">
+
+      <nav class="menu">
         <a href="#features">Recursos</a>
-        <a href="#services">Serviços</a>
-        <a href="#pricing">Planos</a>
+        <a href="#plans">Planos</a>
         <a href="#gallery">Imagens</a>
-        <a href="#faq">FAQ</a>
-      </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn secondary" id="openAuth">Login / Cadastro</button>
-        <button class="btn" id="openPix">Assinar agora</button>
+        <a href="#support">Suporte</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn ghost" id="openLogin">Login / Cadastro</button>
+        <button class="btn" id="openCheckout">Assinar</button>
       </div>
     </div>
-  </div>
+  </header>
 
-  <header class="hero">
-    <div class="container hero-grid">
-      <div>
-        <span class="kicker"><span class="dot"></span> IA, cadastro, planos, imagens e muito mais</span>
-        <h1><span class="gradient">O site mais completo</span><br/>
+  <main>
+    <section class="hero container">
+      <div class="hero-copy">
+        <span class="badge">IA • Cadastro • Planos • Imagens • Suporte</span>
+        <h1>O site mais completo, bonito e inteligente.</h1>
+        <p>
+          Uma plataforma com chat IA, criação de imagens, login, cadastro, planos,
+          área do cliente e visual animado de verdade.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn" id="startNow">Começar agora</button>
+          <button class="btn ghost" id="scrollPlans">Ver planos</button>
+        </div>
+
+        <div class="hero-stats">
+          <div><strong>24/7</strong><span>Suporte IA</span></div>
+          <div><strong>Rápido</strong><span>Interface premium</span></div>
+          <div><strong>Seguro</strong><span>Login + JWT</span></div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="card-glass">
+          <div class="preview-top">
+            <span class="dot"></span>
+            <span>NovaAI online</span>
+          </div>
+
+          <div class="chat-preview" id="chatPreview">
+            <div class="bubble ai">Olá! Em que posso ajudar?</div>
+            <div class="bubble user">Quero um plano premium.</div>
+            <div class="bubble ai">Claro. Posso mostrar as opções agora.</div>
+          </div>
+
+          <div class="quick-actions">
+            <button class="chip">Gerar imagem</button>
+            <button class="chip">Criar conta</button>
+            <button class="chip">Ver suporte</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="container section">
+      <div class="section-head">
+        <h2>Recursos</h2>
+        <p>Visual forte + funções que parecem produto real.</p>
+      </div>
+
+      <div class="grid features-grid">
+        <article class="card">
+          <h3>Chat com IA</h3>
+          <p>Atendimento automático, rápido e direto.</p>
+        </article>
+        <article class="card">
+          <h3>Login e Cadastro</h3>
+          <p>Conta do usuário com autenticação via token.</p>
+        </article>
+        <article class="card">
+          <h3>Planos</h3>
+          <p>Plano básico, pro e elite com CTA de assinatura.</p>
+        </article>
+        <article class="card">
+          <h3>Imagens</h3>
+          <p>Área visual para criação e exibição de imagens.</p>
+        </article>
+        <article class="card">
+          <h3>Suporte</h3>
+          <p>Tickets para dúvidas, erros e pedidos.</p>
+        </article>
+        <article class="card">
+          <h3>Painel</h3>
+          <p>Resumo do usuário e status da conta.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="plans" class="container section">
+      <div class="section-head">
+        <h2>Planos</h2>
+        <p>Escolhe o nível e assina pelo fluxo do site.</p>
+      </div>
+
+      <div class="grid plans-grid">
+        <article class="plan">
+          <span class="tag">Start</span>
+          <h3>R$ 19/mês</h3>
+          <ul>
+            <li>Chat IA básico</li>
+            <li>1 conta</li>
+            <li>Suporte por ticket</li>
+          </ul>
+          <button class="btn ghost planBtn" data-plan="Start - R$19">Assinar</button>
+        </article>
+
+        <article class="plan featured">
+          <span class="tag">Pro</span>
+          <h3>R$ 49/mês</h3>
+          <ul>
+            <li>Chat IA avançado</li>
+            <li>Imagens</li>
+            <li>Área do cliente</li>
+            <li>Prioridade no suporte</li>
+          </ul>
+          <button class="btn planBtn" data-plan="Pro - R$49">Assinar</button>
+        </article>
+
+        <article class="plan">
+          <span class="tag">Elite</span>
+          <h3>R$ 99/mês</h3>
+          <ul>
+            <li>Tudo do Pro</li>
+            <li>Admin completo</li>
+            <li>Mais recursos</li>
+            <li>Mais destaque</li>
+          </ul>
+          <button class="btn ghost planBtn" data-plan="Elite - R$99">Assinar</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="gallery" class="container section">
+      <div class="section-head">
+        <h2>Imagens</h2>
+        <p>Área para gerar, mostrar e organizar conteúdo visual.</p>
+      </div>
+
+      <div class="gallery">
+        <div class="gallery-card big">
+          <h3>Criação de imagem</h3>
+          <p>Integra depois com seu gerador favorito no backend.</p>
+          <div class="image-box purple"></div>
+        </div>
+        <div class="gallery-card">
+          <div class="image-box blue"></div>
+        </div>
+        <div class="gallery-card">
+          <div class="image-box gradient"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="support" class="container section">
+      <div class="section-head">
+        <h2>Suporte</h2>
+        <p>Abra um ticket e envie sua dúvida.</p>
+      </div>
+
+      <div class="support-grid">
+        <form class="card form" id="ticketForm">
+          <input type="text" name="name" placeholder="Seu nome" required />
+          <input type="email" name="email" placeholder="Seu e-mail" required />
+          <textarea name="message" placeholder="Descreva o problema" required></textarea>
+          <button class="btn" type="submit">Enviar ticket</button>
+        </form>
+
+        <div class="card dashboard">
+          <h3>Dashboard</h3>
+          <p id="dashText">Faça login para ver seus dados.</p>
+          <div class="dash-box">
+            <span>Status</span>
+            <strong id="statusText">Visitante</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="authModal">
+    <div class="modal-box">
+      <div class="modal-top">
+        <h3 id="authTitle">Entrar</h3>
+        <button class="icon-btn" data-close="authModal">✕</button>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="login">Login</button>
+        <button class="tab" data-tab="register">Cadastro</button>
+      </div>
+
+      <form id="loginForm" class="auth-form">
