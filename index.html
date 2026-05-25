@@ -3,214 +3,357 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chatbot AI</title>
+  <title>NovaX AI</title>
   <style>
     :root{
-      --bg:#0b1020; --panel:#11182c; --line:#24314f; --text:#ecf2ff; --muted:#93a3c7;
-      --brand:#7c5cff; --brand2:#20d3ff; --user:#5c7cff; --ai:#141c33;
+      --bg:#050816;
+      --bg2:#090f22;
+      --card:rgba(15,20,38,.72);
+      --line:rgba(138,158,255,.14);
+      --text:#eef3ff;
+      --muted:#97a4c9;
+      --brand:#7c5cff;
+      --brand2:#20d3ff;
+      --ok:#21d07a;
+      --warn:#ffbf3f;
+      --danger:#ff5b72;
+      --shadow:0 24px 70px rgba(0,0,0,.38);
+      --r:22px;
     }
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
-      margin:0; font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif; background:linear-gradient(180deg,#09101f,#050814);
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(124,92,255,.20), transparent 28%),
+        radial-gradient(circle at top right, rgba(32,211,255,.14), transparent 24%),
+        linear-gradient(180deg, #050816 0%, #081022 100%);
+      overflow-x:hidden;
     }
-    .app{min-height:100vh; display:grid; grid-template-columns:320px 1fr}
-    .side{
-      padding:20px; border-right:1px solid var(--line); background:rgba(10,15,30,.95);
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1200px, calc(100% - 32px)); margin:0 auto}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(16px);
+      background:rgba(6,10,22,.68);
+      border-bottom:1px solid var(--line);
     }
-    .brand{
-      padding:16px; border:1px solid var(--line); border-radius:18px;
-      background:linear-gradient(180deg, rgba(124,92,255,.16), rgba(32,211,255,.08));
-      margin-bottom:16px;
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
     }
-    .brand h1{margin:0 0 6px;font-size:18px}
-    .brand p{margin:0;color:var(--muted);font-size:13px}
-    label{display:block;font-size:12px;color:#b8c4ea;margin:12px 0 6px}
-    input,textarea,button{
-      width:100%; border-radius:12px; border:1px solid var(--line); background:#0b1327; color:var(--text);
-      padding:12px; font:inherit;
+    .logo{
+      display:flex; gap:12px; align-items:center;
+      font-weight:900;
     }
-    textarea{min-height:96px; resize:vertical}
-    button{
-      background:linear-gradient(135deg,var(--brand),#5aa7ff); border:none; font-weight:700; cursor:pointer;
-      margin-top:10px;
+    .mark{
+      width:42px;height:42px;border-radius:14px;
+      background:linear-gradient(135deg,var(--brand),var(--brand2));
+      box-shadow:0 0 30px rgba(124,92,255,.22);
+      display:grid;place-items:center;
     }
-    button.secondary{background:#18233e; border:1px solid #2c3960}
-    .tiny{font-size:12px;color:var(--muted);line-height:1.45}
-    .main{display:flex; flex-direction:column; min-width:0}
-    .top{
-      padding:16px 20px; border-bottom:1px solid var(--line); background:rgba(9,13,26,.7);
-      display:flex; justify-content:space-between; gap:12px; align-items:center;
+    .links{display:flex; gap:18px; color:var(--muted); font-size:14px; flex-wrap:wrap}
+    .links a:hover{color:var(--text)}
+    .btn{
+      border:none; cursor:pointer; font-weight:800;
+      padding:12px 16px; border-radius:14px; color:white;
+      background:linear-gradient(135deg,var(--brand),#5ea2ff);
+      box-shadow:0 12px 30px rgba(92,123,255,.24);
     }
-    .pill{font-size:12px; padding:7px 10px; border:1px solid #2b3960; border-radius:999px; color:#c5d3ff}
-    .chat{
-      flex:1; display:flex; flex-direction:column; min-height:0;
+    .btn.secondary{
+      background:rgba(18,25,48,.92);
+      border:1px solid var(--line);
+      box-shadow:none;
     }
-    .msgs{
-      flex:1; overflow:auto; padding:18px; display:flex; flex-direction:column; gap:12px;
+
+    .hero{
+      position:relative;
+      padding:72px 0 28px;
     }
-    .msg{
-      max-width:82%; padding:12px 14px; border-radius:16px; border:1px solid #263355; white-space:pre-wrap; line-height:1.45;
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:26px;
+      align-items:center;
     }
-    .msg.user{align-self:flex-end; background:rgba(124,92,255,.22)}
-    .msg.ai{align-self:flex-start; background:rgba(20,28,51,.95)}
-    .meta{font-size:11px;color:var(--muted);margin-top:6px}
-    .composer{
-      border-top:1px solid var(--line); padding:14px; background:rgba(10,15,30,.95);
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid rgba(138,158,255,.16);
+      background:rgba(15,20,38,.55);
+      color:#dce6ff; font-size:13px;
     }
-    .row{display:flex; gap:10px; align-items:flex-end}
-    .row > *{flex:1}
+    .dot{width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 16px rgba(33,208,122,.7)}
+    h1{
+      font-size:clamp(42px, 6vw, 76px);
+      line-height:.96;
+      margin:18px 0 14px;
+      letter-spacing:-.04em;
+    }
+    .gradient{
+      background:linear-gradient(135deg,#fff 0%, #cfd7ff 25%, #8edcff 55%, #7c5cff 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .lead{
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.65;
+      max-width:64ch;
+    }
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:24px}
+    .hero-card{
+      background:linear-gradient(180deg, rgba(15,20,38,.88), rgba(10,14,26,.92));
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:18px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+      min-height:430px;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:radial-gradient(circle at top right, rgba(32,211,255,.12), transparent 38%),
+                 radial-gradient(circle at bottom left, rgba(124,92,255,.14), transparent 35%);
+      pointer-events:none;
+    }
+    .glass{
+      position:relative;
+      border:1px solid rgba(138,158,255,.16);
+      background:rgba(8,12,24,.72);
+      border-radius:22px;
+      padding:16px;
+      box-shadow:0 16px 40px rgba(0,0,0,.22);
+    }
+    .stat-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-top:12px;
+    }
+    .stat{
+      padding:14px;
+      border-radius:18px;
+      background:rgba(8,12,24,.8);
+      border:1px solid rgba(138,158,255,.14);
+    }
+    .stat strong{display:block;font-size:28px}
+    .stat small{color:var(--muted)}
+    .preview{
+      margin-top:14px;
+      border-radius:22px;
+      overflow:hidden;
+      height:220px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.35)),
+        url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80') center/cover;
+      border:1px solid rgba(138,158,255,.14);
+      position:relative;
+    }
+    .badge{
+      position:absolute; left:14px; bottom:14px;
+      padding:8px 11px;
+      border-radius:999px;
+      background:rgba(5,8,18,.74);
+      border:1px solid rgba(255,255,255,.14);
+      font-size:12px;
+    }
+
+    section{padding:26px 0}
+    .section-title{
+      display:flex; justify-content:space-between; align-items:end; gap:10px; flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+    .section-title h2{margin:0;font-size:34px; letter-spacing:-.03em}
+    .section-title p{margin:0;color:var(--muted)}
+    .grid{
+      display:grid; gap:14px;
+    }
+    .features{grid-template-columns:repeat(4,1fr)}
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+    .card h3{margin:0 0 8px}
+    .card p{margin:0;color:var(--muted); line-height:1.55}
+    .icon{
+      width:44px;height:44px;border-radius:15px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(124,92,255,.22), rgba(32,211,255,.14));
+      margin-bottom:12px;
+      border:1px solid rgba(138,158,255,.14);
+    }
+
+    .services{grid-template-columns:repeat(3,1fr)}
+    .service{
+      min-height:200px;
+      display:flex;flex-direction:column;justify-content:space-between;
+      overflow:hidden; position:relative;
+    }
+    .service::after{
+      content:""; position:absolute; inset:auto -20px -30px auto;
+      width:140px; height:140px; border-radius:50%;
+      background:radial-gradient(circle, rgba(124,92,255,.16), transparent 68%);
+      pointer-events:none;
+    }
+
+    .pricing{grid-template-columns:repeat(3,1fr); align-items:stretch}
+    .price{
+      position:relative;
+      min-height:100%;
+      display:flex; flex-direction:column; gap:14px;
+    }
+    .price.featured{
+      border-color:rgba(124,92,255,.44);
+      transform:translateY(-6px);
+      background:linear-gradient(180deg, rgba(124,92,255,.12), rgba(15,20,38,.84));
+    }
+    .money{font-size:42px; font-weight:900; letter-spacing:-.04em}
+    .money span{font-size:14px; color:var(--muted); font-weight:600}
+    ul{margin:0; padding-left:18px; color:#dbe4ff}
+    li{margin:8px 0; color:var(--muted)}
+    .tag{
+      display:inline-flex; align-items:center;
+      gap:8px; padding:8px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(138,158,255,.14);
+      font-size:12px; color:#dfe7ff;
+    }
+
+    .split{
+      display:grid; grid-template-columns:1fr 1fr; gap:14px;
+    }
+    .gallery{
+      display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
+    }
+    .imgbox{
+      border-radius:20px; overflow:hidden; min-height:210px;
+      border:1px solid rgba(138,158,255,.14);
+      background:#0c1224;
+      position:relative;
+    }
+    .imgbox img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.05) contrast(1.04)}
+    .overlay{
+      position:absolute; inset:auto 0 0 0;
+      padding:14px;
+      background:linear-gradient(180deg, transparent, rgba(0,0,0,.82));
+      font-size:13px;
+    }
+
+    .faq{grid-template-columns:1fr 1fr}
+    details{
+      border:1px solid rgba(138,158,255,.14);
+      background:rgba(15,20,38,.74);
+      border-radius:18px;
+      padding:14px 16px;
+    }
+    summary{cursor:pointer; font-weight:700}
+    details p{color:var(--muted); line-height:1.6}
+
+    .footer{
+      padding:28px 0 40px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .modal{
+      position:fixed; inset:0; background:rgba(0,0,0,.58);
+      display:none; place-items:center; padding:18px; z-index:80;
+    }
+    .modal.open{display:grid}
+    .modal-box{
+      width:min(560px,100%);
+      background:linear-gradient(180deg, rgba(15,20,38,.98), rgba(10,14,26,.98));
+      border:1px solid var(--line);
+      border-radius:26px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+    .tabs{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0}
+    .tab{
+      padding:12px; border-radius:14px; cursor:pointer; text-align:center;
+      background:rgba(12,17,32,.92); border:1px solid rgba(138,158,255,.14);
+    }
+    .tab.active{background:linear-gradient(135deg, rgba(124,92,255,.26), rgba(32,211,255,.14)); border-color:rgba(124,92,255,.38)}
+    .hidden{display:none}
+    .field{margin:10px 0}
+    .field input{
+      width:100%; padding:13px 14px; border-radius:14px;
+      border:1px solid rgba(138,158,255,.14); background:rgba(8,12,24,.96); color:var(--text);
+      outline:none;
+    }
+
+    .float{
+      position:absolute;
+      animation: float 6s ease-in-out infinite;
+      opacity:.9;
+      filter:drop-shadow(0 10px 20px rgba(0,0,0,.2));
+    }
+    .f1{top:18px; right:18px}
+    .f2{bottom:18px; left:18px; animation-delay:1.2s}
+    @keyframes float{
+      0%,100%{transform:translateY(0px)}
+      50%{transform:translateY(-12px)}
+    }
+    .reveal{
+      opacity:0; transform:translateY(20px);
+      transition:.7s ease;
+    }
+    .reveal.show{opacity:1; transform:translateY(0)}
+    .pulse{
+      position:relative;
+    }
+    .pulse::after{
+      content:""; position:absolute; inset:-2px;
+      border-radius:inherit;
+      border:1px solid rgba(32,211,255,.26);
+      animation:pulse 2.2s infinite;
+    }
+    @keyframes pulse{
+      0%{transform:scale(1); opacity:.9}
+      100%{transform:scale(1.12); opacity:0}
+    }
+
+    @media (max-width: 980px){
+      .hero-grid,.features,.services,.pricing,.split,.faq{grid-template-columns:1fr}
+      .links{display:none}
+      .section-title h2{font-size:28px}
+    }
   </style>
 </head>
 <body>
-  <div class="app">
-    <aside class="side">
-      <div class="brand">
-        <h1>Chatbot AI</h1>
-        <p>Gemini 3.5 Flash + interface simples</p>
-      </div>
-
-      <label>API Key do Gemini</label>
-      <input id="apiKey" type="password" placeholder="Cole sua chave aqui" />
-
-      <label>Nome do bot</label>
-      <input id="botName" value="Assistente" />
-
-      <label>Prompt do sistema</label>
-      <textarea id="systemPrompt">Você é um assistente direto, inteligente e útil. Responda de forma curta, clara e sem enrolação.</textarea>
-
-      <label>Modelo</label>
-      <input id="model" value="gemini-3.5-flash" />
-
-      <button id="saveBtn">Salvar no navegador</button>
-      <button id="clearBtn" class="secondary">Limpar conversa</button>
-
-      <p class="tiny" style="margin-top:12px">
-        Use isso para teste. Para produção, o ideal é colocar a chave no backend.
-      </p>
-    </aside>
-
-    <main class="main">
-      <div class="top">
+  <div class="nav">
+    <div class="container nav-inner">
+      <div class="logo">
+        <div class="mark">N</div>
         <div>
-          <strong id="title">Assistente</strong><br />
-          <span class="tiny">Chat em tempo real</span>
+          <div>NovaX AI</div>
+          <small style="color:var(--muted)">Site completo com IA</small>
         </div>
-        <div class="pill">Gemini API</div>
       </div>
-
-      <section class="chat">
-        <div id="msgs" class="msgs"></div>
-
-        <div class="composer">
-          <div class="row">
-            <textarea id="input" placeholder="Digite sua mensagem..."></textarea>
-            <button id="sendBtn">Enviar</button>
-          </div>
-        </div>
-      </section>
-    </main>
+      <div class="links">
+        <a href="#features">Recursos</a>
+        <a href="#services">Serviços</a>
+        <a href="#pricing">Planos</a>
+        <a href="#gallery">Imagens</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn secondary" id="openAuth">Login / Cadastro</button>
+        <button class="btn" id="openPix">Assinar agora</button>
+      </div>
+    </div>
   </div>
 
-  <script>
-    const apiKeyEl = document.getElementById('apiKey');
-    const botNameEl = document.getElementById('botName');
-    const systemPromptEl = document.getElementById('systemPrompt');
-    const modelEl = document.getElementById('model');
-    const msgsEl = document.getElementById('msgs');
-    const inputEl = document.getElementById('input');
-    const titleEl = document.getElementById('title');
-
-    let history = [];
-
-    function addMsg(role, text){
-      const div = document.createElement('div');
-      div.className = 'msg ' + (role === 'user' ? 'user' : 'ai');
-      div.textContent = text;
-      msgsEl.appendChild(div);
-      msgsEl.scrollTop = msgsEl.scrollHeight;
-      return div;
-    }
-
-    function loadSaved(){
-      apiKeyEl.value = localStorage.getItem('gemini_api_key') || '';
-      botNameEl.value = localStorage.getItem('bot_name') || 'Assistente';
-      systemPromptEl.value = localStorage.getItem('system_prompt') || systemPromptEl.value;
-      modelEl.value = localStorage.getItem('gemini_model') || 'gemini-3.5-flash';
-      titleEl.textContent = botNameEl.value;
-    }
-
-    function saveAll(){
-      localStorage.setItem('gemini_api_key', apiKeyEl.value.trim());
-      localStorage.setItem('bot_name', botNameEl.value.trim() || 'Assistente');
-      localStorage.setItem('system_prompt', systemPromptEl.value);
-      localStorage.setItem('gemini_model', modelEl.value.trim() || 'gemini-3.5-flash');
-      titleEl.textContent = botNameEl.value.trim() || 'Assistente';
-    }
-
-    async function sendMessage(){
-      const apiKey = apiKeyEl.value.trim();
-      const model = modelEl.value.trim() || 'gemini-3.5-flash';
-      const userText = inputEl.value.trim();
-      const systemPrompt = systemPromptEl.value.trim();
-
-      if(!apiKey){ addMsg('ai','Coloque sua API key primeiro.'); return; }
-      if(!userText) return;
-
-      saveAll();
-      addMsg('user', userText);
-      inputEl.value = '';
-
-      const typing = addMsg('ai', 'Digitando...');
-      try{
-        history.push({ role: 'user', parts: [{ text: userText }] });
-
-        const body = {
-          systemInstruction: { parts: [{ text: systemPrompt }] },
-          contents: history,
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 1024
-          }
-        };
-
-        const res = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body)
-          }
-        );
-
-        const data = await res.json();
-        typing.remove();
-
-        const reply = data?.candidates?.[0]?.content?.parts?.map(p => p.text).join('') || 'Sem resposta.';
-        addMsg('ai', reply);
-        history.push({ role: 'model', parts: [{ text: reply }] });
-      }catch(err){
-        typing.remove();
-        addMsg('ai', 'Erro ao conectar na API.');
-      }
-    }
-
-    document.getElementById('sendBtn').addEventListener('click', sendMessage);
-    document.getElementById('saveBtn').addEventListener('click', saveAll);
-    document.getElementById('clearBtn').addEventListener('click', () => {
-      history = [];
-      msgsEl.innerHTML = '';
-      addMsg('ai', 'Conversa limpa.');
-    });
-
-    inputEl.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter' && !e.shiftKey){
-        e.preventDefault();
-        sendMessage();
-      }
-    });
-
-    botNameEl.addEventListener('input', () => titleEl.textContent = botNameEl.value.trim() || 'Assistente');
-
-    loadSaved();
-    addMsg('ai',
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="kicker"><span class="dot"></span> IA, cadastro, planos, imagens e muito mais</span>
+        <h1><span class="gradient">O site mais completo</span><br/>
